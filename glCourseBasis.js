@@ -11,6 +11,7 @@ var distCENTER;
 
 var OBJ1 = null;
 var PLANE = null;
+var OBJ2 = null;
 
 
 // =====================================================
@@ -178,6 +179,9 @@ function initGL(canvas)
 		gl.viewportHeight = canvas.height;
 		gl.viewport(0, 0, canvas.width, canvas.height);
 
+		gl.enable(GL_BLEND);
+		gl.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 		gl.clearColor(0.7, 0.7, 0.7, 1.0);
 		gl.enable(gl.DEPTH_TEST);
 		gl.enable(gl.CULL_FACE);
@@ -202,7 +206,7 @@ loadObjFile = function(OBJ3D)
 		}
 	}
 
-	xhttp.open("GET", "bunny.obj", true);
+	xhttp.open("GET", OBJ3D.objName , true);
 	xhttp.send();
 }
 
@@ -289,9 +293,11 @@ function webGLStart() {
 	
 	PLANE = new plane();
 	OBJ1 = new objmesh('bunny.obj');
-	//OBJ2 = new objmesh('planer.obj');
+	OBJ2 = new objmesh('plane.obj');
 	//Si on veut ajouter un obj on creer juste un nouvel objet et on l'appel dans drawScene
 	
+
+
 	tick();//point de déclenchement de l'affichage
 }
 
@@ -299,9 +305,10 @@ function webGLStart() {
 function drawScene() {
 	// A chaque fois qu'on actulaise la scene on efface l'image et on rédessine le plan et l'objet
 	gl.clear(gl.COLOR_BUFFER_BIT);
-	PLANE.draw();
+	//PLANE.draw();
+	OBJ2.draw();
 	OBJ1.draw();
-	//OBJ2.draw();
+	
 }
 
 
