@@ -1,0 +1,80 @@
+<html>
+
+<head>
+	<title>WebGL - Canvas test</title>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<style>
+		h4{
+			margin-bottom: 10px;
+			margin-top: 5px;
+		}
+	</style>
+<!------------------------------------------------------------------->
+	<script type="text/javascript" src="glMatrix.js"></script>
+	<script type="text/javascript" src="callbacks.js"></script>
+	<script type="text/javascript" src="glCourseBasis.js"></script>
+<!------------------------------------------------------------------->
+
+</head>
+
+
+<body onload="webGLStart();">
+	<canvas id="WebGL-test" style="border:none;" width="600" height="600"></canvas>
+	<br><br>
+	<div>
+		<h4>Couleur de l'objet</h4>
+		<label>Couleur 1 :</label>
+		<form id="color1">
+			<input type="radio" id="red1" onclick="refresh()" name="color1" value="red">
+			<label for="red"> Rouge </label><br>
+			<input type="radio" id="green1" onclick="refresh()" name="color1" value="green">
+			<label for="green"> Vert </label><br>
+			<input type="radio" id="blue1" onclick="refresh()" name="color1" value="blue">
+			<label for="blue"> Bleu </label><br>
+		</form>
+		<label>Couleur 2 :</label>
+		<form id="color2">
+			<input type="radio" id="red2" onclick="refresh()" name="color2" value="red">
+			<label for="red"> Rouge </label><br>
+			<input type="radio" id="green2" onclick="refresh()" name="color2" value="green">
+			<label for="green"> Vert </label><br>
+			<input type="radio" id="blue2" onclick="refresh()" name="color2" value="blue">
+			<label for="blue"> Bleu </label><br>
+		</form>
+	</div>
+	<div>
+		<h4>Intensité de la source :</h4>
+		<input type="range" min="0" max="10" onclick="refresh()" value="5" class="slider" id="powerRange">
+	</div>
+	<div>
+		<h4>Position de la source</h4>
+		<label>x</label>
+		<input type="range" min="-5" max="5" onclick="refresh()" value="0" class="slider" id="xRange">
+		<label>y</label>
+		<input type="range" min="-5" max="5" onclick="refresh()" value="0" class="slider" id="yRange">
+		<label>z</label>
+		<input type="range" min="-5" max="5" onclick="refresh()" value="0" class="slider" id="zRange">
+		
+	</div>
+	<div>
+		<h4>Couleur lumiere :</h4>
+		<form id="colLight">
+			<input type="radio" id="whiteLight" onclick="refresh()" name="colLight" value="white">
+			<label for="white"> Blanc </label><br>
+			<input type="radio" id="redLight" onclick="refresh()" name="colLight" value="red">
+			<label for="red"> Rouge </label><br>
+			<input type="radio" id="greenLight" onclick="refresh()" name="colLight" value="green">
+			<label for="green"> Vert </label><br>
+			<input type="radio" id="blueLight" onclick="refresh()" name="colLight" value="blue">
+			<label for="blue"> Bleu </label><br>
+			<input type="radio" id="hotLight" onclick="refresh()" name="colLight" value="hot">
+			<label for="hot"> Lumière chaude </label><br>
+			<input type="radio" id="coldLight" onclick="refresh()" name="colLight" value="cold">
+			<label for="cold"> Lumière froide </label><br>
+		</form>
+	</div>
+	
+</body>
+
+
+</html>
