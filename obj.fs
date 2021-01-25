@@ -1,21 +1,21 @@
 
+// precision mediump float;
+
+// varying vec4 pos3D;
+// varying vec3 N;
+
+
+
+
+// // ==============================================
+// void main(void)
+// {
+// 	vec3 col = vec3(0.8,0.4,0.4) * dot(N,normalize(vec3(-pos3D))); // Lambert rendering, eye light source
+// 	gl_FragColor = vec4(col,1.0);
+// }
+
+
 precision mediump float;
-
-varying vec4 pos3D;
-varying vec3 N;
-
-
-
-
-// ==============================================
-void main(void)
-{
-	vec3 col = vec3(0.8,0.4,0.4) * dot(N,normalize(vec3(-pos3D))); // Lambert rendering, eye light source
-	gl_FragColor = vec4(col,1.0);
-}
-
-
-(* precision mediump float;
 
 varying vec4 pos3D;
 varying vec3 N;
@@ -47,11 +47,12 @@ vec3 FrLambertPhong(vec3 kd, float ks, float n, vec3 N, vec3 vi, vec3 vo)
 void main(void)
 {
 	vec3 Nn = normalize(N);
-	vec3 kd = vec3(0.6,0.1,0.1);
+	vec3 kd = vec3(0.6,0.1,0.1); 		//couleur
 	float ks = 0.6;
 	float n=100.0;
-	vec3 Li = vec3(3.0); 							//puissance de la source
+	vec3 Li = vec3(10.0); 							//puissance de la source
 	vec3 lPos = vec3(0.0);
+
 	vec3 vi = normalize(vec3(lPos-vec3(pos3D))); 		//direction d'incidence de la lumière
 	vec3 vo = normalize(vec3(-vec3(pos3D)));
 
@@ -63,7 +64,7 @@ void main(void)
 
 	
 }
- *)
+ 
 
 
 

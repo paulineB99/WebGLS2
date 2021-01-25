@@ -289,7 +289,7 @@ function webGLStart() {
 	
 	PLANE = new plane();
 	OBJ1 = new objmesh('bunny.obj');
-	OBJ2 = new objmesh('planer.obj');
+	//OBJ2 = new objmesh('planer.obj');
 	//Si on veut ajouter un obj on creer juste un nouvel objet et on l'appel dans drawScene
 	
 	tick();//point de déclenchement de l'affichage
