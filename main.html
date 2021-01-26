@@ -15,6 +15,18 @@
 <body onload="webGLStart();">
 	<canvas id="WebGL-test" style="border:none;" width="800" height="600"></canvas>
 	<br><br>
+	<div>
+		<h4>Plan</h4>
+		<label>Couleur</label>
+		<form id="color1">
+			<input type="radio" id="red" onclick="refresh()" name="colorp" value="red">
+			<label for="red"> Rouge </label><br>
+			<input type="radio" id="green" onclick="refresh()" name="colorp" value="green">
+			<label for="green"> Vert </label><br>
+			<input type="radio" id="blue" onclick="refresh()" name="colorp" value="blue">
+			<label for="blue"> Bleu </label><br>
+		</form>
+	</div>	
 </body>
 
 

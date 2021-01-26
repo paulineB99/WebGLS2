@@ -19,9 +19,11 @@ precision mediump float;
 
 varying vec4 pos3D;
 varying vec3 N;
+varying vec3 vColor;
 
 const float PI = 3.14159;
 
+//out vec4 color;
 
 //vec3 SRCpos = vec3(1.0, 1.0, 0.0); //position de la source
 
@@ -47,12 +49,13 @@ vec3 FrLambertPhong(vec3 kd, float ks, float n, vec3 N, vec3 vi, vec3 vo)
 void main(void)
 {
 	vec3 Nn = normalize(N);
-	vec3 kd = vec3(0.6,0.1,0.1); 		//couleur
-	float ks = 0.6;
-	float n=100.0;
+	vec3 kd = vColor; 					//couleur
+	float ks = 0.0;						//def de la reflectance => 0 = mat // 1 = brillant af
+	float n= 100.0;
 	vec3 Li = vec3(10.0); 							//puissance de la source
 	vec3 lPos = vec3(0.0);
 
+	//color = vec4(0.6,0.1,0.1,0.3);
 	vec3 vi = normalize(vec3(lPos-vec3(pos3D))); 		//direction d'incidence de la lumière
 	vec3 vo = normalize(vec3(-vec3(pos3D)));
 

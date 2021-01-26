@@ -138,6 +138,11 @@ class plane {
 
 		this.shader.pMatrixUniform = gl.getUniformLocation(this.shader, "uPMatrix");
 		this.shader.mvMatrixUniform = gl.getUniformLocation(this.shader, "uMVMatrix");
+
+		var color=[];
+		color.push(0.6,0.1,0.1);
+		this.shader.cAttrib = gl.getUniformLocation(shaderProgram, "aVertexColor");
+		gl.uniform3fv(this.shader.cAttrib, color);
 	}
 
 	//Les deux methode setMatrixUniform et setShaderParams peuvent être fussionner 
@@ -167,7 +172,6 @@ class plane {
 // =====================================================
 // FONCTIONS GENERALES, INITIALISATIONS
 // =====================================================
-
 
 
 // =====================================================
