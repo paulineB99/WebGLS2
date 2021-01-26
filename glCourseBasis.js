@@ -13,6 +13,10 @@ var OBJ1 = null;
 var PLANE = null;
 var OBJ2 = null;
 
+// =====================================================
+
+var color = [0.6, 0.1, 0.1];
+
 
 // =====================================================
 // OBJET 3D, lecture fichier obj
@@ -49,6 +53,9 @@ class objmesh {
 		this.shader.rMatrixUniform = gl.getUniformLocation(this.shader, "uRMatrix");
 		this.shader.mvMatrixUniform = gl.getUniformLocation(this.shader, "uMVMatrix");
 		this.shader.pMatrixUniform = gl.getUniformLocation(this.shader, "uPMatrix");
+
+		this.shader.cAttrib = gl.getUniformLocation(this.shader, "aVertexColor");
+		gl.uniform3fv(this.shader.cAttrib, color);
 	}
 	
 	// --------------------------------------------
@@ -139,10 +146,6 @@ class plane {
 		this.shader.pMatrixUniform = gl.getUniformLocation(this.shader, "uPMatrix");
 		this.shader.mvMatrixUniform = gl.getUniformLocation(this.shader, "uMVMatrix");
 
-		var color=[];
-		color.push(0.6,0.1,0.1);
-		this.shader.cAttrib = gl.getUniformLocation(shaderProgram, "aVertexColor");
-		gl.uniform3fv(this.shader.cAttrib, color);
 	}
 
 	//Les deux methode setMatrixUniform et setShaderParams peuvent être fussionner 
@@ -168,6 +171,28 @@ class plane {
 
 }
 
+// =====================================================
+// FONCTIONS POUR L'INTERFACE
+// =====================================================
+
+function initiatButton(){
+	document.getElementById("red").checked = true
+}
+
+function buttonBehaviour(){
+	if(document.getElementById("red").checked) {
+		color = [0.6,0.1,0.1];
+	}else if(document.getElementById("green").checked) {
+		color = [0,1,0];
+	}else if(document.getElementById("blue").checked) {
+		color = [0,0,1];
+	}
+}
+
+function refresh() {
+	buttonBehaviour();
+	setShadersParams();
+}
 
 // =====================================================
 // FONCTIONS GENERALES, INITIALISATIONS
