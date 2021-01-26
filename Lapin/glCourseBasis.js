@@ -11,6 +11,7 @@ var distCENTER;
 
 var OBJ1 = null;
 var PLANE = null;
+var OBJ2 = null;
 
 
 // =====================================================
@@ -182,7 +183,7 @@ function initGL(canvas)
 		gl.enable(gl.DEPTH_TEST);
 		gl.enable(gl.CULL_FACE);
 		gl.cullFace(gl.BACK); 
-		g 	l.enable(gl.BLEND);
+		gl.enable(gl.BLEND);
         gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 	} catch (e) {}
 	if (!gl) {
@@ -204,7 +205,7 @@ loadObjFile = function(OBJ3D)
 		}
 	}
 
-	xhttp.open("GET", "bunny.obj", true);
+	xhttp.open("GET", OBJ3D.objName, true);
 	xhttp.send();
 }
 
@@ -288,6 +289,7 @@ function webGLStart() {
 	
 	PLANE = new plane();
 	OBJ1 = new objmesh('bunny.obj');
+	OBJ2 = new objmesh('plane.obj');
 	
 	tick();
 }
@@ -296,8 +298,10 @@ function webGLStart() {
 function drawScene() {
 
 	gl.clear(gl.COLOR_BUFFER_BIT);
-	PLANE.draw();
+	//PLANE.draw();
+	OBJ2.draw();
 	OBJ1.draw();
+	
 }
 
 
