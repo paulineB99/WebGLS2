@@ -20,6 +20,7 @@ precision mediump float;
 varying vec4 pos3D;
 varying vec3 N;
 varying vec3 vColor;
+varying float alpha;
 
 const float PI = 3.14159;
 
@@ -63,7 +64,7 @@ void main(void)
 	float cosTi = ddot(N,vi);
 
 	vec3 Lo = Li * Fr * cosTi;
-	gl_FragColor = vec4(Lo,0.3);
+	gl_FragColor = vec4(Lo,alpha);
 
 	
 }

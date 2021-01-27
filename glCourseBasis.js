@@ -16,6 +16,7 @@ var OBJ2 = null;
 // =====================================================
 
 var color = [0.6, 0.1, 0.1];
+var alpha = 0.3;
 
 
 // =====================================================
@@ -56,6 +57,9 @@ class objmesh {
 
 		this.shader.cAttrib = gl.getUniformLocation(this.shader, "aVertexColor");
 		gl.uniform3fv(this.shader.cAttrib, color);
+
+		/*this.shader.cAlpha = gl.getUniformLocation(this.shader, "aAlpha");
+		gl.uniformfv(this.shader.cApha, alpha);*/
 	}
 	
 	// --------------------------------------------
