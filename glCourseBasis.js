@@ -58,8 +58,8 @@ class objmesh {
 		this.shader.cAttrib = gl.getUniformLocation(this.shader, "aVertexColor");
 		gl.uniform3fv(this.shader.cAttrib, color);
 
-		/*this.shader.cAlpha = gl.getUniformLocation(this.shader, "aAlpha");
-		gl.uniformfv(this.shader.cApha, alpha);*/
+		this.shader.cAlpha = gl.getUniformLocation(this.shader, "aAlpha");
+		gl.uniform1f(this.shader.cAlpha, alpha);
 	}
 	
 	// --------------------------------------------
@@ -183,6 +183,13 @@ function initiatButton(){
 	document.getElementById("red").checked = true
 }
 
+function slideAlpha() {
+	var sliderAlpha = document.getElementById("alpha");
+	alpha = sliderAlpha.value;
+	sliderAlpha.oninput = function(){
+		alpha = this.value;
+	}
+}
 function buttonBehaviour(){
 	if(document.getElementById("red").checked) {
 		color = [0.6,0.1,0.1];
@@ -195,10 +202,12 @@ function buttonBehaviour(){
 
 function refresh() {
 	buttonBehaviour();
+	slideAlpha();
 	loadShaders(OBJ2);
-	color = [0.6, 0.6, 0.1];
-	loadShaders(OBJ1);
+}
 
+function getAlpha(){
+	console.log(alpha);
 }
 
 // =====================================================
@@ -342,9 +351,9 @@ function drawScene() {
 	// A chaque fois qu'on actulaise la scene on efface l'image et on rédessine le plan et l'objet
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	//PLANE.draw();
-	OBJ2.draw();
+
 	OBJ1.draw();
-	
+	OBJ2.draw();
 }
 
 

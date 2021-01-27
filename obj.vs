@@ -14,7 +14,7 @@ varying vec3 vColor;
 varying float alpha;
 
 void main(void) {
-	alpha = 0.3;
+	alpha = aAlpha;
 	vColor = aVertexColor;
 	pos3D = uMVMatrix * vec4(aVertexPosition,1.0);
 	N = vec3(uRMatrix * vec4(aVertexNormal,1.0));
