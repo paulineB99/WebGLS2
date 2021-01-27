@@ -191,7 +191,10 @@ function buttonBehaviour(){
 
 function refresh() {
 	buttonBehaviour();
-	setShadersParams();
+	loadShaders(OBJ2);
+	color = [0.6, 0.6, 0.1];
+	loadShaders(OBJ1);
+
 }
 
 // =====================================================
@@ -208,13 +211,13 @@ function initGL(canvas)
 		gl.viewportHeight = canvas.height;
 		gl.viewport(0, 0, canvas.width, canvas.height);
 
-		gl.enable(GL_BLEND);
-		gl.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		gl.clearColor(0.7, 0.7, 0.7, 1.0);
 		gl.enable(gl.DEPTH_TEST);
 		gl.enable(gl.CULL_FACE);
 		gl.cullFace(gl.BACK); // on enleve les faces qui nous tourne le dos en fonction de la normale
+		gl.enable(gl.BLEND);
+        gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 	} catch (e) {}
 	if (!gl) {
 		console.log("Could not initialise WebGL");

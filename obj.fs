@@ -63,7 +63,7 @@ void main(void)
 	float cosTi = ddot(N,vi);
 
 	vec3 Lo = Li * Fr * cosTi;
-	gl_FragColor = vec4(Lo,1.0);
+	gl_FragColor = vec4(Lo,0.3);
 
 	
 }
