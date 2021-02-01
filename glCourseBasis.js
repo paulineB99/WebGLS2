@@ -12,6 +12,8 @@ var distCENTER;
 var OBJ1 = null;
 var PLANE = null;
 var OBJ2 = null;
+var OBJ3 = null;
+var OBJ4 = null;
 
 // =====================================================
 
@@ -352,6 +354,8 @@ function webGLStart() {
 	PLANE = new plane();
 	OBJ1 = new objmesh('bunny.obj');
 	OBJ2 = new objmesh('plane.obj');
+	OBJ3 = new objmesh('porsche.obj');
+	OBJ4 = new objmesh('ford.obj')
 	//Si on veut ajouter un obj on creer juste un nouvel objet et on l'appel dans drawScene
 	
 
@@ -367,6 +371,8 @@ function drawScene() {
 
 	OBJ1.draw();
 	OBJ2.draw();
+	OBJ3.draw();
+	OBJ4.draw();
 }
 
 
