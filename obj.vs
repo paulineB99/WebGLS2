@@ -6,14 +6,17 @@ uniform mat4 uMVMatrix;
 uniform mat4 uPMatrix;
 
 uniform float aAlpha;
+uniform float aReflectance;
 uniform vec3 aVertexColor;
 
 varying vec4 pos3D;
 varying vec3 N;
 varying vec3 vColor;
 varying float alpha;
+varying float reflectance;
 
 void main(void) {
+	reflectance = aReflectance;
 	alpha = aAlpha;
 	vColor = aVertexColor;
 	pos3D = uMVMatrix * vec4(aVertexPosition,1.0);

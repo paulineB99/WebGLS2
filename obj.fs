@@ -21,6 +21,7 @@ varying vec4 pos3D;
 varying vec3 N;
 varying vec3 vColor;
 varying float alpha;
+varying float reflectance;
 
 const float PI = 3.14159;
 
@@ -51,9 +52,9 @@ void main(void)
 {
 	vec3 Nn = normalize(N);
 	vec3 kd = vColor; 					//couleur
-	float ks = 0.0;						//def de la reflectance => 0 = mat // 1 = brillant af
+	float ks = reflectance;						//def de la reflectance => 0 = mat // 1 = brillant af
 	float n= 100.0;
-	vec3 Li = vec3(10.0); 							//puissance de la source
+	vec3 Li = vec3(7.0); 							//puissance de la source
 	vec3 lPos = vec3(0.0);
 
 	//color = vec4(0.6,0.1,0.1,0.3);

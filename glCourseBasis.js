@@ -17,6 +17,7 @@ var OBJ2 = null;
 
 var color = [0.6, 0.1, 0.1];
 var alpha = 0.3;
+var refl = 0.6;
 
 
 // =====================================================
@@ -60,6 +61,9 @@ class objmesh {
 
 		this.shader.cAlpha = gl.getUniformLocation(this.shader, "aAlpha");
 		gl.uniform1f(this.shader.cAlpha, alpha);
+
+		this.shader.cRefl = gl.getUniformLocation(this.shader, "aReflectance");
+		gl.uniform1f(this.shader.cRefl, refl);
 	}
 	
 	// --------------------------------------------
@@ -190,6 +194,14 @@ function slideAlpha() {
 		alpha = this.value;
 	}
 }
+function slideReflectance() {
+	var sliderRefl = document.getElementById("brillance");
+	refl = sliderRefl.value;
+	sliderRefl.oninput = function() {
+		refl = this.value;
+	}
+
+}
 function buttonBehaviour(){
 	if(document.getElementById("red").checked) {
 		color = [0.6,0.1,0.1];
@@ -203,6 +215,7 @@ function buttonBehaviour(){
 function refresh() {
 	buttonBehaviour();
 	slideAlpha();
+	slideReflectance();
 	loadShaders(OBJ2);
 }
 
