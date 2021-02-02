@@ -14,6 +14,7 @@ var PLANE = null;
 var OBJ2 = null;
 var OBJ3 = null;
 var OBJ4 = null;
+var OBJ5 = null;
 
 // =====================================================
 
@@ -24,6 +25,7 @@ var kdPlan = [0.1, 0.1, 0.1];
 var kdLapin = [0.6, 0.1, 0.1];
 var kdPorsche = [0.6, 0.1, 0.1];
 var kdFord = [0.6, 0.1, 0.1];
+var kdSphere = [0.6, 0.1, 0.1];
 
 
 
@@ -33,20 +35,21 @@ var alphaPlan = 1;
 var alphaLapin = 0.3;
 var alphaPorsche = 0.3;
 var alphaFord = 0.3;
+var alphaSphere = 0.3;
 
 //Gestion de la reflectance pour chacun des objets
 //var refl = 0.6;
 var reflLapin = 0.6;
 var reflPorsche = 0.6;
 var reflFord = 0.6;
-//var reflSphere = 0.6; 
+var reflSphere = 0.6; 
 
 //Gestion de la rugosité pour chacun des objets
 //var lisse = 100.0;
 var lisseLapin = 100.0;
 var lissePorsche = 100.0;
 var lisseFord = 100.0;
-//var lisseSphere = 100.0;
+var lisseSphere = 100.0;
 
 
 // =====================================================
@@ -332,6 +335,7 @@ function refresh() {
 	loadShaders(OBJ2);;
 	loadShaders(OBJ3);
 	loadShaders(OBJ4);
+	loadShaders(OBJ5);
 	console.log("refresh");
 }
 
@@ -459,13 +463,14 @@ function webGLStart() {
 	mat4.rotate(rotMatrix, rotY, [0, 0, 1]);
 
 	//point d'observation
-	distCENTER = vec3.create([0,-0.2,-3]);
+	distCENTER = vec3.create([0,-0.2,-5]);
 	
 	//PLANE = new plane();
 	OBJ1 = new objmesh('bunny.obj');
 	OBJ2 = new objmesh('plane.obj');
 	OBJ3 = new objmesh('porsche.obj');
-	OBJ4 = new objmesh('ford.obj')
+	OBJ4 = new objmesh('ford.obj');
+	OBJ5 = new objmesh('sphere.obj')
 	//Si on veut ajouter un obj on creer juste un nouvel objet et on l'appel dans drawScene
 	
 
@@ -483,6 +488,8 @@ function drawScene() {
 	OBJ2.draw(kdPlan, alphaPlan);
 	OBJ3.draw(kdPorsche, alphaPorsche, reflPorsche, lissePorsche);
 	OBJ4.draw(kdFord, alphaFord, reflFord, lisseFord);
+	OBJ5.draw(kdSphere, alphaSphere, reflSphere, lisseSphere);
+
 }
 
 
