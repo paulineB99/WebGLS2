@@ -17,20 +17,36 @@ var OBJ4 = null;
 
 // =====================================================
 
+
+//Gestion de Kd pour chacun des objets
 //var kd = [0.6, 0.1, 0.1];
 var kdPlan = [0.1, 0.1, 0.1];
 var kdLapin = [0.6, 0.1, 0.1];
 var kdPorsche = [0.6, 0.1, 0.1];
 var kdFord = [0.6, 0.1, 0.1];
+
+
+
+//Gestion de alpha pour chacun des objets
 //var alpha = 0.3;
 var alphaPlan = 1;
 var alphaLapin = 0.3;
 var alphaPorsche = 0.3;
 var alphaFord = 0.3;
-var refl = 0.6;
+
+//Gestion de la reflectance pour chacun des objets
+//var refl = 0.6;
 var reflLapin = 0.6;
-var lisse = 100.0;
+var reflPorsche = 0.6;
+var reflFord = 0.6;
+//var reflSphere = 0.6; 
+
+//Gestion de la rugosité pour chacun des objets
+//var lisse = 100.0;
 var lisseLapin = 100.0;
+var lissePorsche = 100.0;
+var lisseFord = 100.0;
+//var lisseSphere = 100.0;
 
 
 // =====================================================
@@ -52,7 +68,7 @@ class objmesh {
 	}
 
 	// --------------------------------------------
-	setShadersParams(kd, alpha) {
+	setShadersParams(kd, alpha, refl, lisse) {
 		gl.useProgram(this.shader);
 
 		this.shader.vAttrib = gl.getAttribLocation(this.shader, "aVertexPosition");
@@ -93,9 +109,9 @@ class objmesh {
 	}
 	
 	// --------------------------------------------
-	draw(kd, alpha) {
+	draw(kd, alpha, refl, lisse) {
 		if(this.shader && this.loaded==4 && this.mesh != null) {
-			this.setShadersParams(kd, alpha);
+			this.setShadersParams(kd, alpha, refl, lisse);
 			this.setMatrixUniforms();
 			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.mesh.indexBuffer);
 			gl.drawElements(gl.TRIANGLES, this.mesh.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
@@ -106,6 +122,9 @@ class objmesh {
 
 
 
+// ===============================================================================================================================================================
+// ************************ A NE PAS EFFACER ************************
+// ===============================================================================================================================================================
 // =====================================================
 // PLAN 3D, Support géométrique
 // =====================================================
@@ -460,10 +479,10 @@ function drawScene() {
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	//PLANE.draw();
 
-	OBJ1.draw(kdLapin, alphaLapin);
+	OBJ1.draw(kdLapin, alphaLapin, reflLapin, lisseLapin);
 	OBJ2.draw(kdPlan, alphaPlan);
-	OBJ3.draw(kdPorsche, alphaPorsche);
-	OBJ4.draw(kdFord, alphaFord);
+	OBJ3.draw(kdPorsche, alphaPorsche, reflPorsche, lissePorsche);
+	OBJ4.draw(kdFord, alphaFord, reflFord, lisseFord);
 }
 
 
