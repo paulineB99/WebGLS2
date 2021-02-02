@@ -3,9 +3,10 @@ precision mediump float;
 
 varying vec4 pos3D;				//pos3D est calculé à partir de la position des sommets
 varying vec3 N;
-varying vec3 vColor;
+varying vec3 kd;
 varying float alpha;
 varying float reflectance;
+varying float lisse;
 
 const float PI = 3.14159;
 
@@ -35,9 +36,9 @@ vec3 FrLambertPhong(vec3 kd, float ks, float n, vec3 N, vec3 vi, vec3 vo)
 void main(void)
 {
 	vec3 Nn = normalize(N);
-	vec3 kd = vColor; 							//couleur
+	//vec3 kd = vColor; 							//couleur
 	float ks = reflectance;						//def de la reflectance => 0 = mat // 1 = brillant af
-	float n= 1000.0;							//rigosité du matériau
+	float n= lisse;							//rigosité du matériau
 	vec3 Li = vec3(7.0); 						//puissance de la source
 	vec3 lPos = vec3(0.0);
 
