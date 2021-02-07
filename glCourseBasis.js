@@ -43,6 +43,7 @@ var reflLapin = 0.6;
 var reflPorsche = 0.6;
 var reflFord = 0.6;
 var reflSphere = 0.6; 
+var reflPlan = 0;
 
 //Gestion de la rugosité pour chacun des objets
 //var lisse = 100.0;
@@ -50,6 +51,7 @@ var lisseLapin = 100.0;
 var lissePorsche = 100.0;
 var lisseFord = 100.0;
 var lisseSphere = 100.0;
+var lissePlan = 100.0;
 
 
 // =====================================================
@@ -473,7 +475,7 @@ function webGLStart() {
 	OBJ5 = new objmesh('sphere.obj')
 	//Si on veut ajouter un obj on creer juste un nouvel objet et on l'appel dans drawScene
 	
-
+	initiatButton();
 
 	tick();//point de déclenchement de l'affichage
 }
@@ -485,7 +487,7 @@ function drawScene() {
 	//PLANE.draw();
 
 	OBJ1.draw(kdLapin, alphaLapin, reflLapin, lisseLapin);
-	OBJ2.draw(kdPlan, alphaPlan);
+	OBJ2.draw(kdPlan, alphaPlan, reflPlan, lissePlan);
 	OBJ3.draw(kdPorsche, alphaPorsche, reflPorsche, lissePorsche);
 	OBJ4.draw(kdFord, alphaFord, reflFord, lisseFord);
 	OBJ5.draw(kdSphere, alphaSphere, reflSphere, lisseSphere);
