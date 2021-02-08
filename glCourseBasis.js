@@ -11,47 +11,21 @@ var distCENTER;
 
 var OBJ1 = null;
 var PLANE = null;
-var OBJ2 = null;
-var OBJ3 = null;
-var OBJ4 = null;
-var OBJ5 = null;
 
 // =====================================================
 
 
 //Gestion de Kd pour chacun des objets
-//var kd = [0.6, 0.1, 0.1];
-var kdPlan = [0.1, 0.1, 0.1];
-var kdLapin = [0.6, 0.1, 0.1];
-var kdPorsche = [0.6, 0.1, 0.1];
-var kdFord = [0.6, 0.1, 0.1];
-var kdSphere = [0.6, 0.1, 0.1];
-
-
+var kd = [0.6, 0.1, 0.1];
 
 //Gestion de alpha pour chacun des objets
-//var alpha = 0.3;
-var alphaPlan = 1;
 var alphaLapin = 0.3;
-var alphaPorsche = 0.3;
-var alphaFord = 0.3;
-var alphaSphere = 0.3;
 
 //Gestion de la reflectance pour chacun des objets
-//var refl = 0.6;
-var reflLapin = 0.6;
-var reflPorsche = 0.6;
-var reflFord = 0.6;
-var reflSphere = 0.6; 
-var reflPlan = 0;
+var refl = 0.6;
 
 //Gestion de la rugosité pour chacun des objets
-//var lisse = 100.0;
-var lisseLapin = 100.0;
-var lissePorsche = 100.0;
-var lisseFord = 100.0;
-var lisseSphere = 100.0;
-var lissePlan = 100.0;
+var lisse = 100.0;
 
 
 // =====================================================
@@ -73,7 +47,7 @@ class objmesh {
 	}
 
 	// --------------------------------------------
-	setShadersParams(kd, alpha, refl, lisse) {
+	setShadersParams(alpha) {
 		gl.useProgram(this.shader);
 
 		this.shader.vAttrib = gl.getAttribLocation(this.shader, "aVertexPosition");
@@ -90,16 +64,16 @@ class objmesh {
 		this.shader.mvMatrixUniform = gl.getUniformLocation(this.shader, "uMVMatrix");
 		this.shader.pMatrixUniform = gl.getUniformLocation(this.shader, "uPMatrix");
 
-		this.shader.cAttrib = gl.getUniformLocation(this.shader, "aVertexKd");
+		this.shader.cAttrib = gl.getUniformLocation(this.shader, "uVertexKd");
 		gl.uniform3fv(this.shader.cAttrib, kd);
 
-		this.shader.cAlpha = gl.getUniformLocation(this.shader, "aAlpha");
+		this.shader.cAlpha = gl.getUniformLocation(this.shader, "uAlpha");
 		gl.uniform1f(this.shader.cAlpha, alpha);
 
-		this.shader.cRefl = gl.getUniformLocation(this.shader, "aReflectance");
+		this.shader.cRefl = gl.getUniformLocation(this.shader, "uReflectance");
 		gl.uniform1f(this.shader.cRefl, refl);
 		
-		this.shader.cLisse = gl.getUniformLocation(this.shader, "aLisse");
+		this.shader.cLisse = gl.getUniformLocation(this.shader, "uLisse");
 		gl.uniform1f(this.shader.cLisse, lisse);
 	}
 	
@@ -114,9 +88,9 @@ class objmesh {
 	}
 	
 	// --------------------------------------------
-	draw(kd, alpha, refl, lisse) {
+	draw(alpha) {
 		if(this.shader && this.loaded==4 && this.mesh != null) {
-			this.setShadersParams(kd, alpha, refl, lisse);
+			this.setShadersParams(alpha);
 			this.setMatrixUniforms();
 			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.mesh.indexBuffer);
 			gl.drawElements(gl.TRIANGLES, this.mesh.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
@@ -125,15 +99,10 @@ class objmesh {
 
 }
 
-
-
-// ===============================================================================================================================================================
-// ************************ A NE PAS EFFACER ************************
-// ===============================================================================================================================================================
 // =====================================================
 // PLAN 3D, Support géométrique
 // =====================================================
-/*
+
 class plane {
 	
 	// --------------------------------------------
@@ -218,17 +187,10 @@ class plane {
 	}
 
 }
-*/
+
 // =====================================================
 // FONCTIONS POUR L'INTERFACE
 // =====================================================
-
-function initiatButton(){
-	document.getElementById("redLapin").checked = true;
-	document.getElementById("redSphere").checked = true;
-	document.getElementById("redPorsche").checked = true;
-	document.getElementById("redFord").checked = true;
-}
 
 function slideAlpha() {
 	var sliderAlphaLapin = document.getElementById("alphaLapin");
@@ -236,109 +198,11 @@ function slideAlpha() {
 	sliderAlphaLapin.oninput = function(){
 		alphaLapin = this.value;
 	}
-	var sliderAlphaSphere = document.getElementById("alphaSphere");
-	alphaSphere = sliderAlphaSphere.value;
-	sliderAlphaSphere.oninput = function(){
-		alphaSphere = this.value;
-	}
-	var sliderAlphaPorsche = document.getElementById("alphaPorsche");
-	alphaPorsche = sliderAlphaPorsche.value;
-	sliderAlphaPorsche.oninput = function(){
-		alphaPorsche = this.value;
-	}
-	var sliderAlphaFord = document.getElementById("alphaFord");
-	alphaFord = sliderAlphaFord.value;
-	sliderAlphaFord.oninput = function(){
-		alphaFord = this.value;
-	}
-}
-function slideReflectance() {
-	var sliderReflLapin = document.getElementById("brillanceLapin");
-	reflLapin = sliderReflLapin.value;
-	sliderReflLapin.oninput = function() {
-		reflLapin = this.value;
-	}
-	var sliderReflSphere = document.getElementById("brillanceSphere");
-	reflSphere = sliderReflSphere.value;
-	sliderReflSphere.oninput = function() {
-		reflSphere = this.value;
-	}
-	var sliderReflPorsche = document.getElementById("brillancePorsche");
-	reflPorsche = sliderReflPorsche.value;
-	sliderReflPorsche.oninput = function() {
-		reflPorsche = this.value;
-	}
-	var sliderReflFord = document.getElementById("brillanceFord");
-	reflFord = sliderReflFord.value;
-	sliderReflFord.oninput = function() {
-		reflFord = this.value;
-	}
-
-}
-function slideRugosite() {
-	var sliderLisseLapin = document.getElementById("lisseLapin");
-	lisseLapin = sliderLisseLapin.value;
-	sliderLisseLapin.oninput = function() {
-		lisseLapin= this.value;
-	}
-	var sliderLisseSphere = document.getElementById("lisseSphere");
-	lisseSphere = sliderLisseSphere.value;
-	sliderLisseSphere.oninput = function() {
-		lisseSphere= this.value;
-	}
-	var sliderLissePorsche = document.getElementById("lissePorsche");
-	lissePorsche = sliderLissePorsche.value;
-	sliderLissePorsche.oninput = function() {
-		lissePorsche= this.value;
-	}
-	var sliderLisseFord = document.getElementById("lisseFord");
-	lisseFord = sliderLisseFord.value;
-	sliderLisseFord.oninput = function() {
-		lisseFord= this.value;
-	}
-}
-function buttonBehaviour(){
-	if(document.getElementById("redLapin").checked) {
-		kdLapin = [0.6,0.1,0.1];
-	}else if(document.getElementById("greenLapin").checked) {
-		kdLapin = [0,1,0];
-	}else if(document.getElementById("blueLapin").checked) {
-		kdLapin = [0,0,1];
-	}
-	if(document.getElementById("redSphere").checked) {
-		kdSphere = [0.6,0.1,0.1];
-	}else if(document.getElementById("greenSphere").checked) {
-		kdSphere = [0,1,0];
-	}else if(document.getElementById("blueSphere").checked) {
-		kdSphere = [0,0,1];
-	}
-	if(document.getElementById("redPorsche").checked) {
-		kdPorsche = [0.6,0.1,0.1];
-	}else if(document.getElementById("greenPorsche").checked) {
-		kdPorsche = [0,1,0];
-	}else if(document.getElementById("bluePorsche").checked) {
-		kdPorsche = [0,0,1];
-	}
-	if(document.getElementById("redFord").checked) {
-		kdFord = [0.6,0.1,0.1];
-	}else if(document.getElementById("greenFord").checked) {
-		kdFord = [0,1,0];
-	}else if(document.getElementById("blueFord").checked) {
-		kdFord = [0,0,1];
-	}
 }
 
 function refresh() {
-	buttonBehaviour();
 	slideAlpha();
-	slideReflectance();
-	slideRugosite();
 	loadShaders(OBJ1);
-	loadShaders(OBJ2);;
-	loadShaders(OBJ3);
-	loadShaders(OBJ4);
-	loadShaders(OBJ5);
-	console.log("refresh");
 }
 
 // =====================================================
@@ -467,15 +331,10 @@ function webGLStart() {
 	//point d'observation
 	distCENTER = vec3.create([0,-0.2,-5]);
 	
-	//PLANE = new plane();
-	OBJ1 = new objmesh('bunny.obj');
-	OBJ2 = new objmesh('plane.obj');
-	OBJ3 = new objmesh('porsche.obj');
-	OBJ4 = new objmesh('ford.obj');
-	OBJ5 = new objmesh('sphere.obj')
-	//Si on veut ajouter un obj on creer juste un nouvel objet et on l'appel dans drawScene
+	PLANE = new plane();
+	OBJ1 = new objmesh('porsche.obj');
 	
-	initiatButton();
+	//Si on veut ajouter un obj on creer juste un nouvel objet et on l'appel dans drawScene
 
 	tick();//point de déclenchement de l'affichage
 }
@@ -484,14 +343,8 @@ function webGLStart() {
 function drawScene() {
 	// A chaque fois qu'on actulaise la scene on efface l'image et on rédessine le plan et l'objet
 	gl.clear(gl.COLOR_BUFFER_BIT);
-	//PLANE.draw();
-
-	OBJ1.draw(kdLapin, alphaLapin, reflLapin, lisseLapin);
-	OBJ2.draw(kdPlan, alphaPlan, reflPlan, lissePlan);
-	OBJ3.draw(kdPorsche, alphaPorsche, reflPorsche, lissePorsche);
-	OBJ4.draw(kdFord, alphaFord, reflFord, lisseFord);
-	OBJ5.draw(kdSphere, alphaSphere, reflSphere, lisseSphere);
-
+	PLANE.draw();
+	OBJ1.draw(alphaLapin);
 }
 
 
