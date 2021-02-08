@@ -19,7 +19,7 @@ var PLANE = null;
 var kd = [0.6, 0.1, 0.1];
 
 //Gestion de alpha pour chacun des objets
-var alphaLapin = 0.3;
+var alphaPorsche = 0.5;
 
 //Gestion de la reflectance pour chacun des objets
 var refl = 0.6;
@@ -193,10 +193,10 @@ class plane {
 // =====================================================
 
 function slideAlpha() {
-	var sliderAlphaLapin = document.getElementById("alphaLapin");
-	alphaLapin = sliderAlphaLapin.value;
-	sliderAlphaLapin.oninput = function(){
-		alphaLapin = this.value;
+	var sliderAlphaPorsche = document.getElementById("alphaPorsche");
+	alphaPorsche = sliderAlphaPorsche.value;
+	sliderAlphaPorsche.oninput = function(){
+		alphaPorsche = this.value;
 	}
 }
 
@@ -344,7 +344,7 @@ function drawScene() {
 	// A chaque fois qu'on actulaise la scene on efface l'image et on rédessine le plan et l'objet
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	PLANE.draw();
-	OBJ1.draw(alphaLapin);
+	OBJ1.draw(alphaPorsche);
 }
 
 

@@ -10,10 +10,6 @@ varying float lisse;
 
 const float PI = 3.14159;
 
-//out vec4 color;
-
-//vec3 SRCpos = vec3(1.0, 1.0, 0.0); //position de la source
-
 
 // ==============================================
 
@@ -39,7 +35,7 @@ void main(void)
 	//vec3 kd = vColor; 							//couleur
 	float ks = reflectance;						//def de la reflectance => 0 = mat // 1 = brillant af
 	float n= lisse;							//rigosité du matériau
-	vec3 Li = vec3(7.0); 						//puissance de la source
+	vec3 Li = vec3(4.0); 						//puissance de la source
 	vec3 lPos = vec3(0.0);
 
 	//color = vec4(0.6,0.1,0.1,0.3);
