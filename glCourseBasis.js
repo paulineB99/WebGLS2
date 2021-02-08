@@ -51,7 +51,7 @@ var lisseLapin = 100.0;
 var lissePorsche = 100.0;
 var lisseFord = 100.0;
 var lisseSphere = 100.0;
-var lissePlan = 100.0;
+var lissePlan = 1.0;
 
 
 // =====================================================
@@ -472,10 +472,11 @@ function webGLStart() {
 	OBJ2 = new objmesh('plane.obj');
 	OBJ3 = new objmesh('porsche.obj');
 	OBJ4 = new objmesh('ford.obj');
-	OBJ5 = new objmesh('sphere.obj')
+	OBJ5 = new objmesh('sphere.obj');
 	//Si on veut ajouter un obj on creer juste un nouvel objet et on l'appel dans drawScene
 	
 	initiatButton();
+
 
 	tick();//point de déclenchement de l'affichage
 }
@@ -485,13 +486,13 @@ function drawScene() {
 	// A chaque fois qu'on actulaise la scene on efface l'image et on rédessine le plan et l'objet
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	//PLANE.draw();
-
-	OBJ1.draw(kdLapin, alphaLapin, reflLapin, lisseLapin);
 	OBJ2.draw(kdPlan, alphaPlan, reflPlan, lissePlan);
+	
+	
 	OBJ3.draw(kdPorsche, alphaPorsche, reflPorsche, lissePorsche);
 	OBJ4.draw(kdFord, alphaFord, reflFord, lisseFord);
 	OBJ5.draw(kdSphere, alphaSphere, reflSphere, lisseSphere);
-
+	OBJ1.draw(kdLapin, alphaLapin, reflLapin, lisseLapin);
 }
 
 
