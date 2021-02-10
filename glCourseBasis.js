@@ -195,8 +195,11 @@ class plane {
 function slideAlpha() {
 	var sliderAlphaPorsche = document.getElementById("alphaPorsche");
 	alphaPorsche = sliderAlphaPorsche.value;
+	var output = document.getElementById("demo");
+	output.innerHTML = sliderAlphaPorsche.value;
 	sliderAlphaPorsche.oninput = function(){
 		alphaPorsche = this.value;
+		output.innerHTML = this.value;
 	}
 }
 

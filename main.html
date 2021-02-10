@@ -1,6 +1,7 @@
 <html>
 
 <head>
+	<link href="leStyle.scss"/>
 	<title>WebGL - Canvas test</title>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
@@ -8,9 +9,7 @@
 	<script type="text/javascript" src="callbacks.js"></script>
 	<script type="text/javascript" src="glCourseBasis.js"></script>
 	<script type="text/javascript" src="objLoader.js"></script> <!--Sert a charcger les fichiers obl--> 
-	<style>
-		th {padding-left : 50px;}
-	</style>
+	
 </head>
 
 
@@ -21,10 +20,12 @@
 				<canvas id="WebGL-test" style="border:none;" width="1000" height="800"></canvas>
 			</th>
 			<th>
-				<div>
+				<div class="slidecontainer">
 					<h4>Porsche</h4>
 					<label>Alpha</label>
 					<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.50" class="slider" id="alphaPorsche">
+					<p>Value: <span id="demo">0.5</span></p>
+				</div>
 				</div>
 		</tr>	
 	</table>		
