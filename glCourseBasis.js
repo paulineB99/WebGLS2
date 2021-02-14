@@ -16,7 +16,7 @@ var PLANE = null;
 
 
 //Gestion de Kd pour chacun des objets
-var kd = [0.6, 0.1, 0.1];
+//var kd = [0.6, 0.1, 0.1];
 
 //Gestion de alpha pour chacun des objets
 var alphaPorsche = 0.5;
@@ -49,7 +49,7 @@ class objmesh {
 	}
 
 	// --------------------------------------------
-	setShadersParams(alpha) {
+	setShadersParams(alpha, kd) {
 		gl.useProgram(this.shader);
 
 		this.shader.vAttrib = gl.getAttribLocation(this.shader, "aVertexPosition");
@@ -90,9 +90,9 @@ class objmesh {
 	}
 	
 	// --------------------------------------------
-	draw(alpha) {
+	draw(alpha, kd) {
 		if(this.shader && this.loaded==4 && this.mesh != null) {
-			this.setShadersParams(alpha);
+			this.setShadersParams(alpha, kd);
 			this.setMatrixUniforms();
 			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.mesh.indexBuffer);
 			gl.drawElements(gl.TRIANGLES, this.mesh.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
@@ -366,9 +366,9 @@ function drawScene() {
 	// A chaque fois qu'on actulaise la scene on efface l'image et on rédessine le plan et l'objet
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	PLANE.draw();
-	OBJ1.draw(alphaPorsche);
-	OBJ2.draw(alphaFord);
-	OBJ3.draw(alphaBunny);
+	OBJ1.draw(alphaPorsche, [0.6, 0.1, 0.1]);
+	OBJ2.draw(alphaFord, [0.1, 0.6, 0.1]);
+	OBJ3.draw(alphaBunny, [0.1, 0.1, 0.6]);
 }
 
 
