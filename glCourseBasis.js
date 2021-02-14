@@ -379,6 +379,17 @@ loadObjFile = function(OBJ3D)
 			var tmpMesh = new OBJ.Mesh(xhttp.responseText);
 			OBJ.initMeshBuffers(gl,tmpMesh);
 			OBJ3D.mesh=tmpMesh;
+			/*Ajout de 11/02 pour afficher le tableau d'indices*/
+			/*console.log(OBJ3D.mesh.indices.length);
+			console.log("toto");
+			for (var v=0; v<50; v++){
+				console.log(OBJ.mesh.indices[v]);
+			}
+			OBJ3D.mesh.indiceEdges=[];
+			for (var v=0; v< OBJ3D.mesh.indices.length; v+=3){
+				OBJ3D.mesh.indiceEdges.push();
+			}*/
+			/*fin de l'ajout*/
 		}
 	}
 
