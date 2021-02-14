@@ -1,5 +1,6 @@
 .slidecontainer {
   width: 100%;
+  margin-bottom: 50px;
 }
 
 .slider {
@@ -32,4 +33,13 @@
   border: 2px solid rgb(245, 220, 225);
   padding: 4px 6px;
   font: 16px "Lucida Grande", "Helvetica", "Arial", "sans-serif"
+}
+
+.interface {
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.caramel{
+  background-color: #e0e0e0;
 }
