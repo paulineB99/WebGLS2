@@ -255,9 +255,9 @@ function initGL(canvas)
 // =====================================================
 loadObjFile = function(OBJ3D)
 {
-	var xhttp = new XMLHttpRequest(); // dreation de requete html
+	var xhttp = new XMLHttpRequest(); // creation de requete html
 
-	xhttp.onreadystatechange = function() { //création d'une fonction pour quand je fichier serra arrivée
+	xhttp.onreadystatechange = function() { //création d'une fonction pour quand le fichier serra arrivée
 		if (xhttp.readyState == 4 && xhttp.status == 200) {
 			var tmpMesh = new OBJ.Mesh(xhttp.responseText);
 			OBJ.initMeshBuffers(gl,tmpMesh);
