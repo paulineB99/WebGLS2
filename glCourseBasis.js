@@ -10,13 +10,11 @@ var distCENTER;
 // =====================================================
 
 var OBJ1 = null;
+var OBJ2 = null;
+var OBJ3 = null;
 var PLANE = null;
 
 // =====================================================
-
-
-//Gestion de Kd pour chacun des objets
-//var kd = [0.6, 0.1, 0.1];
 
 //Gestion de alpha pour chacun des objets
 var alphaPorsche = 0.5;
