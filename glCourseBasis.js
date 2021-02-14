@@ -364,9 +364,10 @@ function drawScene() {
 	// A chaque fois qu'on actulaise la scene on efface l'image et on rédessine le plan et l'objet
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	PLANE.draw();
-	OBJ1.draw(alphaPorsche, [0.6, 0.1, 0.1]);
-	OBJ2.draw(alphaFord, [0.1, 0.6, 0.1]);
 	OBJ3.draw(alphaBunny, [0.1, 0.1, 0.6]);
+	OBJ2.draw(alphaFord, [0.1, 0.6, 0.1]);
+	OBJ1.draw(alphaPorsche, [0.6, 0.1, 0.1]);
+	
 }
 
 
