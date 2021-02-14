@@ -20,6 +20,8 @@ var kd = [0.6, 0.1, 0.1];
 
 //Gestion de alpha pour chacun des objets
 var alphaPorsche = 0.5;
+var alphaFord = 0.5;
+var alphaBunny = 0.5;
 
 //Gestion de la reflectance pour chacun des objets
 var refl = 0.6;
@@ -115,7 +117,7 @@ class plane {
 		
 	// --------------------------------------------
 	initAll() {
-		var size=1.0;
+		var size=1.5;
 		var vertices = [
 			-size, -size, 0.0,
 			 size, -size, 0.0,
@@ -195,11 +197,27 @@ class plane {
 function slideAlpha() {
 	var sliderAlphaPorsche = document.getElementById("alphaPorsche");
 	alphaPorsche = sliderAlphaPorsche.value;
-	var output = document.getElementById("demo");
-	output.innerHTML = sliderAlphaPorsche.value;
+	var outputPorsche = document.getElementById("demoPorsche");
+	outputPorsche.innerHTML = sliderAlphaPorsche.value;
 	sliderAlphaPorsche.oninput = function(){
 		alphaPorsche = this.value;
-		output.innerHTML = this.value;
+		outputPorsche.innerHTML = this.value;
+	}
+	var sliderAlphaFord = document.getElementById("alphaFord");
+	alphaFord = sliderAlphaFord.value;
+	var outputFord = document.getElementById("demoFord");
+	outputFord.innerHTML = sliderAlphaFord.value;
+	sliderAlphaFord.oninput = function(){
+		alphaFord = this.value;
+		outputFord.innerHTML = this.value;
+	}
+	var sliderAlphaBunny = document.getElementById("alphaBunny");
+	alphaBunny = sliderAlphaBunny.value;
+	var outputBunny = document.getElementById("demoBunny");
+	outputBunny.innerHTML = sliderAlphaBunny.value;
+	sliderAlphaBunny.oninput = function(){
+		alphaBunny = this.value;
+		outputBunny.innerHTML = this.value;
 	}
 }
 
@@ -336,7 +354,8 @@ function webGLStart() {
 	
 	PLANE = new plane();
 	OBJ1 = new objmesh('porsche.obj');
-	
+	OBJ2 = new objmesh('ford.obj');
+	OBJ3 = new objmesh('bunny.obj');
 	//Si on veut ajouter un obj on creer juste un nouvel objet et on l'appel dans drawScene
 
 	tick();//point de déclenchement de l'affichage
@@ -348,6 +367,8 @@ function drawScene() {
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	PLANE.draw();
 	OBJ1.draw(alphaPorsche);
+	OBJ2.draw(alphaFord);
+	OBJ3.draw(alphaBunny);
 }
 
 
