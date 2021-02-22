@@ -88,12 +88,24 @@ class objmesh {
 	}
 	
 	// --------------------------------------------
+	/*
 	draw(alpha, kd) {
 		if(this.shader && this.loaded==4 && this.mesh != null) {
 			this.setShadersParams(alpha, kd);
 			this.setMatrixUniforms();
 			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.mesh.indexBuffer);
 			gl.drawElements(gl.TRIANGLES, this.mesh.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+		}
+	}*/
+	// --------------------------------------------
+	draw(kd, alpha, refl, lisse/* , fil */) {
+		if(this.shader && this.loaded==4 && this.mesh != null) {
+			this.setShadersParams(kd, alpha, refl, lisse);
+			this.setMatrixUniforms();
+
+			/**/
+			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.mesh.edgeBuffer);
+			gl.drawElements(gl.LINES, this.mesh.edgeBuffer.numItems, gl.UNSIGNED_SHORT, 0);
 		}
 	}
 
@@ -261,6 +273,38 @@ loadObjFile = function(OBJ3D)
 			var tmpMesh = new OBJ.Mesh(xhttp.responseText);
 			OBJ.initMeshBuffers(gl,tmpMesh);
 			OBJ3D.mesh=tmpMesh;
+			OBJ.initMeshBuffers(gl,tmpMesh);
+			OBJ3D.mesh=tmpMesh;
+			/*Ajout de 11/02 pour afficher le tableau d'indices*/
+			//console.log(OBJ3D.mesh.indices.length);
+			console.log("toto");
+			/*for (var v=0; v<50; v++){
+				console.log(OBJ.mesh.indices[v]);
+			}*/
+			OBJ3D.mesh.indiceEdges=[];
+			for (var v=0; v< OBJ3D.mesh.indices.length; v+=3){
+
+				OBJ3D.mesh.indiceEdges.push(OBJ3D.mesh.indices[v], OBJ3D.mesh.indices[v+1],
+											OBJ3D.mesh.indices[v+1], OBJ3D.mesh.indices[v+2],
+											OBJ3D.mesh.indices[v+2], OBJ3D.mesh.indices[v]);
+			}
+
+			/*for (var v=0; v<18; v+=3){
+				OBJ3D.mesh.indiceEdges.push(OBJ3D.mesh.indices[v], OBJ3D.mesh.indices[v+1],
+											OBJ3D.mesh.indices[v+1], OBJ3D.mesh.indices[v+2],
+											OBJ3D.mesh.indices[v+2], OBJ3D.mesh.indices[v]);
+				console.log("v=", OBJ3D.mesh.indices[v], 'v+1= ',OBJ3D.mesh.indices[v+1], 'v+2= ', OBJ3D.mesh.indices[v+2])
+			}*/
+			/*fin de l'ajout*/
+			/*for (var i=0; i<12; i++ ){
+				console.log("i= ", i, " => ", OBJ3D.mesh.indiceEdges[i]);
+			}*/
+
+			OBJ3D.mesh.edgeBuffer = gl.createBuffer();
+			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, OBJ3D.mesh.edgeBuffer);
+			gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(OBJ3D.mesh.indiceEdges), gl.STATIC_DRAW);
+			OBJ3D.mesh.edgeBuffer.itemSize = 1;
+			OBJ3D.mesh.edgeBuffer.numItems = OBJ3D.mesh.indiceEdges.length;
 		}
 	}
 
