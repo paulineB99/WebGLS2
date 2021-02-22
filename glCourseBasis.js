@@ -63,13 +63,15 @@ class objmesh {
 	// --------------------------------------------
 	constructor(objFname) {
 		this.objName = objFname;
-		this.shaderName = 'obj';
+		this.shaderName= 'obj';
 		this.loaded = -1;
 		this.shader = null;
 		this.mesh = null;
 		
 		loadObjFile(this); //charge l'obj
-		loadShaders(this); // charge les shaders
+		//loadShaders(this); // charge les shaders
+
+		loadShaders2(this);
 	}
 
 	// --------------------------------------------
@@ -114,14 +116,18 @@ class objmesh {
 	}
 	
 	// --------------------------------------------
-	draw(kd, alpha, refl, lisse/* , fil */) {
+	draw(kd, alpha, refl, lisse ) {
 		if(this.shader && this.loaded==4 && this.mesh != null) {
 			this.setShadersParams(kd, alpha, refl, lisse);
 			this.setMatrixUniforms();
 
-			/**/
+			
+			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.mesh.indexBuffer);
+			gl.drawElements(gl.TRIANGLES, this.mesh.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+			/*
 			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.mesh.edgeBuffer);
 			gl.drawElements(gl.LINES, this.mesh.edgeBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+			*/
 		}
 	}
 
@@ -425,7 +431,10 @@ function loadShaders(Obj3D) {
 	loadShaderText(Obj3D,'.vs');
 	loadShaderText(Obj3D,'.fs');
 }
-
+function loadShaders2(Obj3D) {
+	loadShaderText(Obj3D,'.vs');
+	loadShaderText(Obj3D,'.fs');
+}
 // =====================================================
 function loadShaderText(Obj3D,ext) {   // lecture asynchrone...
   var xhttp = new XMLHttpRequest();
@@ -505,6 +514,11 @@ function webGLStart() {
 	OBJ3 = new objmesh('porsche.obj');
 	OBJ4 = new objmesh('ford.obj');
 	OBJ5 = new objmesh('sphere.obj');
+	/*OBJ6 = new objmesh('bunny.obj', 'wire');
+	//OBJ7 = new objmesh('plane.obj', 'wire');
+	OBJ8 = new objmesh('porsche.obj', 'wire');
+	OBJ9 = new objmesh('ford.obj', 'wire');
+	OBJ10 = new objmesh('sphere.obj', 'wire');*/
 	//Si on veut ajouter un obj on creer juste un nouvel objet et on l'appel dans drawScene
 	
 	initiatButton();
