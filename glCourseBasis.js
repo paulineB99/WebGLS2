@@ -139,7 +139,7 @@ class objmesh {
 
 		this.shader2.mvMatrixUniform = gl.getUniformLocation(this.shader2.shader, "uMVMatrix");
 		this.shader2.pMatrixUniform = gl.getUniformLocation(this.shader2.shader, "uPMatrix");
-		gl.uniformMatrix4fv(this.shader1.rMatrixUniform, false, rotMatrix);
+		gl.uniformMatrix4fv(this.shader2.rMatrixUniform, false, rotMatrix);
 		gl.uniformMatrix4fv(this.shader2.mvMatrixUniform, false, mvMatrix);
 		gl.uniformMatrix4fv(this.shader2.pMatrixUniform, false, pMatrix);
 	}
