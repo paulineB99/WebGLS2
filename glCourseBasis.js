@@ -72,31 +72,42 @@ class objmesh {
 
 		this.shader1 = { fname:'obj'};
 		loadShadersNEW(this.shader1);
+
+		this.shader2 = { shaderName:'wireframe'};
+		loadShadersNEW(this.shader2);
 	}
 
 	// --------------------------------------------
 	setShadersParams(kd, alpha, refl, lisse) {
 		//gl.useProgram(this.shader);
+
+		mat4.identity(mvMatrix);
+		mat4.translate(mvMatrix, distCENTER);
+		mat4.multiply(mvMatrix, rotMatrix);
+		
         gl.useProgram(this.shader1.shader);
 
 
-		this.shader.vAttrib = gl.getAttribLocation(this.shader, "aVertexPosition");
+		this.shader.vAttrib = gl.getAttribLocation(this.shader1.shader, "aVertexPosition");
 		gl.enableVertexAttribArray(this.shader.vAttrib);
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.mesh.vertexBuffer);
 		gl.vertexAttribPointer(this.shader.vAttrib, this.mesh.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
-		this.shader.nAttrib = gl.getAttribLocation(this.shader, "aVertexNormal");
+		this.shader.nAttrib = gl.getAttribLocation(this.shader1.shader, "aVertexNormal");
 		gl.enableVertexAttribArray(this.shader.nAttrib);
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.mesh.normalBuffer);
 		gl.vertexAttribPointer(this.shader.nAttrib, this.mesh.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
-		translation = [-0.8,0.0,0.0];
-		this.shader.tAttrib = gl.getUniformLocation(this.shader, "aTranslation");
-		gl.uniform3fv(this.shader.tAttrib, translation);
+		/*translation = [-0.8,0.0,0.0];
+		this.shader.tAttrib = gl.getUniformLocation(this.shader1.shader, "aTranslation");
+		gl.uniform3fv(this.shader.tAttrib, translation);*/
 
 		this.shader1.rMatrixUniform = gl.getUniformLocation(this.shader1.shader, "uRMatrix");
 		this.shader1.mvMatrixUniform = gl.getUniformLocation(this.shader1.shader, "uMVMatrix");
 		this.shader1.pMatrixUniform = gl.getUniformLocation(this.shader1.shader, "uPMatrix");
+		gl.uniformMatrix4fv(this.shader1.rMatrixUniform, false, rotMatrix);
+		gl.uniformMatrix4fv(this.shader1.mvMatrixUniform, false, mvMatrix);
+		gl.uniformMatrix4fv(this.shader1.pMatrixUniform, false, pMatrix);
 
 		this.shader1.shader.cAttrib = gl.getUniformLocation(this.shader1.shader, "aVertexKd");
 		gl.uniform3fv(this.shader1.shader.cAttrib, kd);
@@ -109,6 +120,25 @@ class objmesh {
 		
 		this.shader1.shader.cLisse = gl.getUniformLocation(this.shader1.shader, "aLisse");
 		gl.uniform1f(this.shader1.shader.cLisse, lisse);
+	}
+
+
+	setShader2Params() {
+
+		mat4.identity(mvMatrix);
+		mat4.translate(mvMatrix, distCENTER);
+		
+		gl.useProgram(this.shader2.shader);
+
+		this.shader2.vAttrib = gl.getAttribLocation(this.shader2.shader, "aVertexPosition");
+		gl.enableVertexAttribArray(this.shader2.vAttrib);
+		gl.bindBuffer(gl.ARRAY_BUFFER, this.mesh.vertexBuffer);
+		gl.vertexAttribPointer(this.shader2.vAttrib, this.mesh.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+		this.shader2.mvMatrixUniform = gl.getUniformLocation(this.shader2.shader, "uMVMatrix");
+		this.shader2.pMatrixUniform = gl.getUniformLocation(this.shader2.shader, "uPMatrix");
+		gl.uniformMatrix4fv(this.shader2.mvMatrixUniform, false, mvMatrix);
+		gl.uniformMatrix4fv(this.shader2.pMatrixUniform, false, pMatrix);
 	}
 	
 	// --------------------------------------------
@@ -125,11 +155,20 @@ class objmesh {
 	draw(kd, alpha, refl, lisse ) {
 		if(this.shader1.shader && this.loaded==4 && this.mesh != null) {
 			this.setShadersParams(kd, alpha, refl, lisse);
-			this.setMatrixUniforms();
+			//this.setMatrixUniforms();
 
-			/* */
+			 
 			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.mesh.indexBuffer);
 			gl.drawElements(gl.TRIANGLES, this.mesh.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+			
+			
+		}
+	}
+	draw2() {
+		if(this.shader2.shader && this.loaded==4 && this.mesh != null) {
+			this.setShader2Params();
+			//this.setMatrixUniforms();
+			
 			
 			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.mesh.edgeBuffer);
 			gl.drawElements(gl.LINES, this.mesh.edgeBuffer.numItems, gl.UNSIGNED_SHORT, 0);
@@ -370,10 +409,6 @@ function loadShaders(Obj3D) {
 	loadShaderText(Obj3D,'.vs');
 	loadShaderText(Obj3D,'.fs');
 }
-function loadShaders(Obj3D) {
-	loadShaderText(Obj3D,'.vs');
-	loadShaderText(Obj3D,'.fs');
-}
 // =====================================================
 function loadShaderText(Obj3D,ext) {   // lecture asynchrone...
   var xhttp = new XMLHttpRequest();
@@ -472,6 +507,7 @@ function drawScene() {
 	OBJ4.draw(kdFord, alphaFord, reflFord, lisseFord);
 	OBJ5.draw(kdSphere, alphaSphere, reflSphere, lisseSphere);
 	OBJ1.draw(kdLapin, alphaLapin, reflLapin, lisseLapin);
+	OBJ1.draw2();
 }
 
 
