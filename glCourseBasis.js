@@ -15,6 +15,7 @@ var OBJ2 = null;
 var OBJ3 = null;
 var OBJ4 = null;
 var OBJ5 = null;
+var OBJ6 = null;
 
 // =====================================================
 
@@ -63,7 +64,7 @@ class objmesh {
 	// --------------------------------------------
 	constructor(objFname) {
 		this.objName = objFname;
-		this.shaderName = 'obj';
+		//this.shaderName = 'obj';
 		this.loaded = -1;
 		this.mesh = null;
 		
@@ -73,7 +74,7 @@ class objmesh {
 		this.shader1 = { fname:'obj'};
 		loadShadersNEW(this.shader1);
 
-		this.shader2 = { shaderName:'wire'};
+		this.shader2 = { fname:'wire'};
 		loadShadersNEW(this.shader2);
 	}
 
@@ -88,15 +89,15 @@ class objmesh {
         gl.useProgram(this.shader1.shader);
 
 
-		this.shader.vAttrib = gl.getAttribLocation(this.shader1.shader, "aVertexPosition");
-		gl.enableVertexAttribArray(this.shader.vAttrib);
+		this.shader1.vAttrib = gl.getAttribLocation(this.shader1.shader, "aVertexPosition");
+		gl.enableVertexAttribArray(this.shader1.vAttrib);
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.mesh.vertexBuffer);
-		gl.vertexAttribPointer(this.shader.vAttrib, this.mesh.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
+		gl.vertexAttribPointer(this.shader1.vAttrib, this.mesh.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
-		this.shader.nAttrib = gl.getAttribLocation(this.shader1.shader, "aVertexNormal");
-		gl.enableVertexAttribArray(this.shader.nAttrib);
+		this.shader1.nAttrib = gl.getAttribLocation(this.shader1.shader, "aVertexNormal");
+		gl.enableVertexAttribArray(this.shader1.nAttrib);
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.mesh.normalBuffer);
-		gl.vertexAttribPointer(this.shader.nAttrib, this.mesh.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
+		gl.vertexAttribPointer(this.shader1.nAttrib, this.mesh.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
 		/*translation = [-0.8,0.0,0.0];
 		this.shader.tAttrib = gl.getUniformLocation(this.shader1.shader, "aTranslation");
@@ -109,17 +110,17 @@ class objmesh {
 		gl.uniformMatrix4fv(this.shader1.mvMatrixUniform, false, mvMatrix);
 		gl.uniformMatrix4fv(this.shader1.pMatrixUniform, false, pMatrix);
 
-		this.shader1.shader.cAttrib = gl.getUniformLocation(this.shader1.shader, "aVertexKd");
-		gl.uniform3fv(this.shader1.shader.cAttrib, kd);
+		this.shader1.cAttrib = gl.getUniformLocation(this.shader1.shader, "aVertexKd");
+		gl.uniform3fv(this.shader1.cAttrib, kd);
 
-		this.shader1.shader.cAlpha = gl.getUniformLocation(this.shader1.shader, "aAlpha");
-		gl.uniform1f(this.shader1.shader.cAlpha, alpha);
+		this.shader1.cAlpha = gl.getUniformLocation(this.shader1.shader, "aAlpha");
+		gl.uniform1f(this.shader1.cAlpha, alpha);
 
-		this.shader1.shader.cRefl = gl.getUniformLocation(this.shader1.shader, "aReflectance");
-		gl.uniform1f(this.shader1.shader.cRefl, refl);
+		this.shader1.cRefl = gl.getUniformLocation(this.shader1.shader, "aReflectance");
+		gl.uniform1f(this.shader1.cRefl, refl);
 		
-		this.shader1.shader.cLisse = gl.getUniformLocation(this.shader1.shader, "aLisse");
-		gl.uniform1f(this.shader1.shader.cLisse, lisse);
+		this.shader1.cLisse = gl.getUniformLocation(this.shader1.shader, "aLisse");
+		gl.uniform1f(this.shader1.cLisse, lisse);
 	}
 
 
@@ -127,6 +128,7 @@ class objmesh {
 
 		mat4.identity(mvMatrix);
 		mat4.translate(mvMatrix, distCENTER);
+		mat4.multiply(mvMatrix, rotMatrix);
 		
 		gl.useProgram(this.shader2.shader);
 
@@ -137,6 +139,7 @@ class objmesh {
 
 		this.shader2.mvMatrixUniform = gl.getUniformLocation(this.shader2.shader, "uMVMatrix");
 		this.shader2.pMatrixUniform = gl.getUniformLocation(this.shader2.shader, "uPMatrix");
+		gl.uniformMatrix4fv(this.shader1.rMatrixUniform, false, rotMatrix);
 		gl.uniformMatrix4fv(this.shader2.mvMatrixUniform, false, mvMatrix);
 		gl.uniformMatrix4fv(this.shader2.pMatrixUniform, false, pMatrix);
 	}
@@ -153,10 +156,8 @@ class objmesh {
 	
 	// --------------------------------------------
 	draw(kd, alpha, refl, lisse ) {
-		if(this.shader1.shader && this.loaded==4 && this.mesh != null) {
+		if(this.shader1.shader && this.mesh != null) {
 			this.setShadersParams(kd, alpha, refl, lisse);
-			//this.setMatrixUniforms();
-
 			 
 			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.mesh.indexBuffer);
 			gl.drawElements(gl.TRIANGLES, this.mesh.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
@@ -165,14 +166,12 @@ class objmesh {
 		}
 	}
 	draw2() {
-		if(this.shader2.shader && this.loaded==4 && this.mesh != null) {
+		
+		if(this.shader2.shader && this.mesh != null) {
 			this.setShader2Params();
-			//this.setMatrixUniforms();
-			
 			
 			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.mesh.edgeBuffer);
 			gl.drawElements(gl.LINES, this.mesh.edgeBuffer.numItems, gl.UNSIGNED_SHORT, 0);
-			
 		}
 	}
 
@@ -339,12 +338,7 @@ loadObjFile = function(OBJ3D)
 			var tmpMesh = new OBJ.Mesh(xhttp.responseText);
 			OBJ.initMeshBuffers(gl,tmpMesh);
 			OBJ3D.mesh=tmpMesh;
-			/*Ajout de 11/02 pour afficher le tableau d'indices*/
-			//console.log(OBJ3D.mesh.indices.length);
-			console.log("toto");
-			/*for (var v=0; v<50; v++){
-				console.log(OBJ.mesh.indices[v]);
-			}*/
+
 			OBJ3D.mesh.indiceEdges=[];
 			for (var v=0; v< OBJ3D.mesh.indices.length; v+=3){
 
@@ -353,16 +347,6 @@ loadObjFile = function(OBJ3D)
 											OBJ3D.mesh.indices[v+2], OBJ3D.mesh.indices[v]);
 			}
 
-			/*for (var v=0; v<18; v+=3){
-				OBJ3D.mesh.indiceEdges.push(OBJ3D.mesh.indices[v], OBJ3D.mesh.indices[v+1],
-											OBJ3D.mesh.indices[v+1], OBJ3D.mesh.indices[v+2],
-											OBJ3D.mesh.indices[v+2], OBJ3D.mesh.indices[v]);
-				console.log("v=", OBJ3D.mesh.indices[v], 'v+1= ',OBJ3D.mesh.indices[v+1], 'v+2= ', OBJ3D.mesh.indices[v+2])
-			}*/
-			/*fin de l'ajout*/
-			/*for (var i=0; i<12; i++ ){
-				console.log("i= ", i, " => ", OBJ3D.mesh.indiceEdges[i]);
-			}*/
 
 			OBJ3D.mesh.edgeBuffer = gl.createBuffer();
 			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, OBJ3D.mesh.edgeBuffer);
@@ -488,6 +472,7 @@ function webGLStart() {
 	OBJ3 = new objmesh('porsche.obj');
 	OBJ4 = new objmesh('ford.obj');
 	OBJ5 = new objmesh('sphere.obj');
+
 	
 	//Si on veut ajouter un obj on creer juste un nouvel objet et on l'appel dans drawScene
 	
@@ -504,10 +489,17 @@ function drawScene() {
 	//PLANE.draw();
 	OBJ2.draw(kdPlan, alphaPlan, reflPlan, lissePlan);
 	OBJ3.draw(kdPorsche, alphaPorsche, reflPorsche, lissePorsche);
+	OBJ3.draw2();
 	OBJ4.draw(kdFord, alphaFord, reflFord, lisseFord);
+	OBJ4.draw2();
 	OBJ5.draw(kdSphere, alphaSphere, reflSphere, lisseSphere);
+	OBJ5.draw2();
 	OBJ1.draw(kdLapin, alphaLapin, reflLapin, lisseLapin);
 	OBJ1.draw2();
+
+	
+	
+	
 }
 
 
