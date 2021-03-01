@@ -1,5 +1,6 @@
 attribute vec3 aVertexPosition;
 attribute vec3 aVertexNormal;
+uniform vec3 aTranslation;
 
 uniform mat4 uRMatrix;
 uniform mat4 uMVMatrix;
@@ -24,7 +25,7 @@ void main(void) {
 	alpha = aAlpha;
 	kd = aVertexKd;
 	lisse = aLisse;
-	pos3D = uMVMatrix * vec4(aVertexPosition/*+vec3(-0.8,0.0,0.0)*/,1.0);
+	pos3D = uMVMatrix * vec4(aVertexPosition + aTranslation,1.0);
 	N = vec3(uRMatrix * vec4(aVertexNormal,1.0));
 	gl_Position = uPMatrix * pos3D;
 }

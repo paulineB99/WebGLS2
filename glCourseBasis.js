@@ -53,7 +53,7 @@ var lisseFord = 100.0;
 var lisseSphere = 100.0;
 var lissePlan = 1.0;
 
-
+var translation =[];
 // =====================================================
 // OBJET 3D, lecture fichier obj
 // =====================================================
@@ -87,6 +87,10 @@ class objmesh {
 		gl.enableVertexAttribArray(this.shader.nAttrib);
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.mesh.normalBuffer);
 		gl.vertexAttribPointer(this.shader.nAttrib, this.mesh.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+		translation = [-0.8,0.0,0.0];
+		this.shader.tAttrib = gl.getUniformLocation(this.shader, "aTranslation");
+		gl.uniform3fv(this.shader.tAttrib, translation);
 
 		this.shader.rMatrixUniform = gl.getUniformLocation(this.shader, "uRMatrix");
 		this.shader.mvMatrixUniform = gl.getUniformLocation(this.shader, "uMVMatrix");
