@@ -73,7 +73,7 @@ class objmesh {
 		this.shader1 = { fname:'obj'};
 		loadShadersNEW(this.shader1);
 
-		this.shader2 = { shaderName:'wireframe'};
+		this.shader2 = { shaderName:'wire'};
 		loadShadersNEW(this.shader2);
 	}
 
