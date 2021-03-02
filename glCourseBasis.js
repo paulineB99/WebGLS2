@@ -56,7 +56,7 @@ var lissePlan = 1.0;
 
 var translation =[];
 
-var fogColor = [0.7, 0.7, 0.7, 1.0];
+var fogColor = [0.7, 0.7, 0.7, 1.0] ;
 var fogAmount = 0.7;
 // =====================================================
 // OBJET 3D, lecture fichier obj
