@@ -14,6 +14,10 @@ const float PI = 3.14159;
 
 //vec3 SRCpos = vec3(1.0, 1.0, 0.0); //position de la source
 
+varying vec4 fogColor;
+varying float fogAmount;
+
+
 
 // ==============================================
 
@@ -50,7 +54,10 @@ void main(void)
 	float cosTi = ddot(N,vi);							//cos de l'orientation
 
 	vec3 Lo = Li * Fr * cosTi;
-	gl_FragColor = vec4(Lo,alpha);
+	//gl_FragColor = vec4(Lo,alpha); //+ (fogColor- originalColor) * fogAmount
+	vec4 originalColor = vec4(Lo,alpha);
+	//gl_FragColor = originalColor + (fogColor - originalColor) * fogAmount;
+	gl_FragColor = mix(originalColor, fogColor, fogAmount);
 
 	
 }

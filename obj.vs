@@ -12,6 +12,8 @@ uniform float aAlpha;
 uniform float aReflectance;
 uniform vec3 aVertexKd;
 uniform float aLisse;
+uniform vec4 uFogColor;
+uniform float uFogAmount;
 
 varying vec4 pos3D;
 varying vec3 N;
@@ -19,8 +21,19 @@ varying vec3 kd;
 varying float alpha;
 varying float reflectance;
 varying float lisse;
+varying vec4 fogColor;
+varying float fogAmount;
 
 void main(void) {
+
+	//fogColor = vec4(0.8, 0.9, 1, 1);
+	//fogAmount = 0.5;
+
+	
+	fogColor = uFogColor;
+	fogAmount = uFogAmount;
+
+
 	reflectance = aReflectance;
 	alpha = aAlpha;
 	kd = aVertexKd;

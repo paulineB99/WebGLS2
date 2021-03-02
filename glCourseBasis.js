@@ -55,6 +55,9 @@ var lisseSphere = 100.0;
 var lissePlan = 1.0;
 
 var translation =[];
+
+var fogColor = [0.8, 0.9, 1, 1];
+var fogAmount = 0.5;
 // =====================================================
 // OBJET 3D, lecture fichier obj
 // =====================================================
@@ -121,6 +124,12 @@ class objmesh {
 		
 		this.shader1.cLisse = gl.getUniformLocation(this.shader1.shader, "aLisse");
 		gl.uniform1f(this.shader1.cLisse, lisse);
+
+		this.shader1.cFogColor = gl.getUniformLocation(this.shader1.shader, "uFogColor");
+		gl.uniform4fv(this.shader1.cFogColor, fogColor);
+
+		this.shader1.cFogAmount = gl.getUniformLocation(this.shader1.shader, "uFogAmount");
+		gl.uniform1f(this.shader1.cFogAmount, fogAmount);
 	}
 
 
@@ -489,13 +498,13 @@ function drawScene() {
 	//PLANE.draw();
 	OBJ2.draw(kdPlan, alphaPlan, reflPlan, lissePlan);
 	OBJ3.draw(kdPorsche, alphaPorsche, reflPorsche, lissePorsche);
-	OBJ3.draw2();
+	//OBJ3.draw2();
 	OBJ4.draw(kdFord, alphaFord, reflFord, lisseFord);
-	OBJ4.draw2();
+	//OBJ4.draw2();
 	OBJ5.draw(kdSphere, alphaSphere, reflSphere, lisseSphere);
-	OBJ5.draw2();
+	//OBJ5.draw2();
 	OBJ1.draw(kdLapin, alphaLapin, reflLapin, lisseLapin);
-	OBJ1.draw2();
+	//OBJ1.draw2();
 
 	
 	
