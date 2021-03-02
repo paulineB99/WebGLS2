@@ -56,8 +56,8 @@ var lissePlan = 1.0;
 
 var translation =[];
 
-var fogColor = [0.8, 0.9, 1, 1];
-var fogAmount = 0.5;
+var fogColor = [0.7, 0.7, 0.7, 1.0];
+var fogAmount = 0.7;
 // =====================================================
 // OBJET 3D, lecture fichier obj
 // =====================================================
@@ -151,6 +151,12 @@ class objmesh {
 		gl.uniformMatrix4fv(this.shader2.rMatrixUniform, false, rotMatrix);
 		gl.uniformMatrix4fv(this.shader2.mvMatrixUniform, false, mvMatrix);
 		gl.uniformMatrix4fv(this.shader2.pMatrixUniform, false, pMatrix);
+
+		this.shader2.cFogColor = gl.getUniformLocation(this.shader2.shader, "uFogColor");
+		gl.uniform4fv(this.shader2.cFogColor, fogColor);
+
+		this.shader2.cFogAmount = gl.getUniformLocation(this.shader2.shader, "uFogAmount");
+		gl.uniform1f(this.shader2.cFogAmount, fogAmount);
 	}
 	
 	// --------------------------------------------
@@ -324,7 +330,7 @@ function initGL(canvas)
 		gl.viewport(0, 0, canvas.width, canvas.height);
 
 
-		gl.clearColor(0.7, 0.7, 0.7, 1.0);
+		gl.clearColor(...fogColor);
 		gl.enable(gl.DEPTH_TEST);
 		gl.enable(gl.CULL_FACE);
 		gl.cullFace(gl.BACK); // on enleve les faces qui nous tourne le dos en fonction de la normale
@@ -498,13 +504,13 @@ function drawScene() {
 	//PLANE.draw();
 	OBJ2.draw(kdPlan, alphaPlan, reflPlan, lissePlan);
 	OBJ3.draw(kdPorsche, alphaPorsche, reflPorsche, lissePorsche);
-	//OBJ3.draw2();
+	OBJ3.draw2();
 	OBJ4.draw(kdFord, alphaFord, reflFord, lisseFord);
-	//OBJ4.draw2();
+	OBJ4.draw2();
 	OBJ5.draw(kdSphere, alphaSphere, reflSphere, lisseSphere);
-	//OBJ5.draw2();
+	OBJ5.draw2();
 	OBJ1.draw(kdLapin, alphaLapin, reflLapin, lisseLapin);
-	//OBJ1.draw2();
+	OBJ1.draw2();
 
 	
 	
