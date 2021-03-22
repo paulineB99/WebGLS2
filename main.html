@@ -14,6 +14,7 @@
 
 
 <body onload="webGLStart();">
+<table>
 	<div class = "Canva">
 		<tr>
 			<th>	
@@ -32,25 +33,30 @@
 				<a>"SelectAnObject(OBJ)"</a>
 			</select>
 		</h3>		
-			 
+		
 		
 		<h3> 
-			<label> Alpha : </label> <span id="alphaLapin">0.5</span>
-			<br>
-			<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.30" class="slider" id="alphaLapin">
-			<br>
-			<label>Brillance</label>
-			<br>
-			<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.60" class="slider" id="brillanceLapin">
-			<br>
-			<label>Rugosité</label>
-			<br>
-			<input type="range" min="1" max="500" step="5" onclick="refresh()" value="100" class="slider" id="lisseLapin">			
-		
+			<p><label> Alpha : </label> <span id="demoBunny">0.5</span>
+				<br>
+				<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.50" class="slider" id="alphaBunny">
+			</p>
+			<p>
+				<label>Reflectance</label>  <span id="brillanceLapin">0.5</span>
+				<br>
+				<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.50" class="slider" id="reflLapin">
+			</p>
+
+			<p> 
+				<label>Rugosité</label>  <span id="rugBunny">0.5</span>
+				<br>
+				<input type="range" min="0" max="1" step="0.05" onclick="refresh()" value="0.50" class="slider" id="lisseLapin">			
+			</p>
 		</h3>			
 				
 			</p>
 	</div>
+
+</table>
 			
 			
 				<!-- <form ><h2>

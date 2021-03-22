@@ -29,7 +29,7 @@ var kdSphere = [0.6, 0.1, 0.1];
 //Gestion de alpha pour chacun des objets
 //var alpha = 0.3;
 var alphaPlan = 1;
-var alphaLapin = 0.3;
+var alphaBunny = 0.3;
 var alphaPorsche = 0.3;
 var alphaFord = 0.3;
 var alphaSphere = 0.3;
@@ -44,7 +44,7 @@ var reflPlan = 0;
 
 //Gestion de la rugosité pour chacun des objets
 //var lisse = 100.0;
-var lisseLapin = 100.0;
+var lisseLapin = 0.5;
 var lissePorsche = 100.0;
 var lisseFord = 100.0;
 var lisseSphere = 100.0;
@@ -199,57 +199,81 @@ function initiatButton(){
 	document.getElementById("redPorsche").checked = true;
 	document.getElementById("redFord").checked = true;
 }
-
 function slideAlpha() {
-	var sliderAlphaLapin = document.getElementById("alphaLapin");
-	alphaLapin = sliderAlphaLapin.value;
-	sliderAlphaLapin.oninput = function(){
-		alphaLapin = this.value;
+	
+	var sliderAlphaBunny = document.getElementById("alphaBunny");
+	alphaBunny = sliderAlphaBunny.value;
+	var outputBunny = document.getElementById("demoBunny");
+	outputBunny.innerHTML = sliderAlphaBunny.value;
+	sliderAlphaBunny.oninput = function(){
+		alphaBunny = this.value;
+		outputBunny.innerHTML = this.value;
 	}
-	var sliderAlphaSphere = document.getElementById("alphaSphere");
-	alphaSphere = sliderAlphaSphere.value;
-	sliderAlphaSphere.oninput = function(){
-		alphaSphere = this.value;
-	}
-	var sliderAlphaPorsche = document.getElementById("alphaPorsche");
-	alphaPorsche = sliderAlphaPorsche.value;
-	sliderAlphaPorsche.oninput = function(){
-		alphaPorsche = this.value;
-	}
-	var sliderAlphaFord = document.getElementById("alphaFord");
-	alphaFord = sliderAlphaFord.value;
-	sliderAlphaFord.oninput = function(){
-		alphaFord = this.value;
-	}
+	
+	// var sliderAlphaSphere = document.getElementById("alphaSphere");
+	// alphaSphere = sliderAlphaSphere.value;
+	// var outputSphere = document.getElementById("demoSphere");
+	// outputSphere.innerHTML = sliderAlphaSphere.value;
+	// sliderAlphaSphere.oninput = function(){
+	// 	alphaSphere = this.value;
+	// 	outputSphere.innerHTML = this.value;
+	// }
+	// var sliderAlphaPorsche = document.getElementById("alphaPorsche");
+	// alphaPorsche = sliderAlphaPorsche.value;
+	// var outputPorsche = document.getElementById("demoPorsche");
+	// outputPorsche.innerHTML = sliderAlphaPorsche.value;
+	// sliderAlphaPorsche.oninput = function(){
+	// 	alphaPorsche = this.value;
+	// 	outputPorsche.innerHTML = this.value;
+	// }
+	// var sliderAlphaFord = document.getElementById("alphaFord");
+	// alphaFord = sliderAlphaFord.value;
+	// var outputFord = document.getElementById("demoFord");
+	// outputFord.innerHTML = sliderAlphaFord.value;
+	// sliderAlphaFord.oninput = function(){
+	// 	alphaFord = this.value;
+	// 	outputFord.innerHTML = this.value;
+	// }
 }
+
+
+
 function slideReflectance() {
-	var sliderReflLapin = document.getElementById("brillanceLapin");
+
+	var sliderReflLapin = document.getElementById("reflLapin");
 	reflLapin = sliderReflLapin.value;
+	var outputB = document.getElementById("brillanceLapin");
+	outputB.innerHTML = sliderReflLapin.value;
 	sliderReflLapin.oninput = function() {
 		reflLapin = this.value;
+		outputB.innerHTML = this.value;
+
 	}
-	var sliderReflSphere = document.getElementById("brillanceSphere");
-	reflSphere = sliderReflSphere.value;
-	sliderReflSphere.oninput = function() {
-		reflSphere = this.value;
-	}
-	var sliderReflPorsche = document.getElementById("brillancePorsche");
-	reflPorsche = sliderReflPorsche.value;
-	sliderReflPorsche.oninput = function() {
-		reflPorsche = this.value;
-	}
-	var sliderReflFord = document.getElementById("brillanceFord");
-	reflFord = sliderReflFord.value;
-	sliderReflFord.oninput = function() {
-		reflFord = this.value;
-	}
+	// var sliderReflSphere = document.getElementById("brillanceSphere");
+	// reflSphere = sliderReflSphere.value;
+	// sliderReflSphere.oninput = function() {
+	// 	reflSphere = this.value;
+	// }
+	// var sliderReflPorsche = document.getElementById("brillancePorsche");
+	// reflPorsche = sliderReflPorsche.value;
+	// sliderReflPorsche.oninput = function() {
+	// 	reflPorsche = this.value;
+	// }
+	// var sliderReflFord = document.getElementById("brillanceFord");
+	// reflFord = sliderReflFord.value;
+	// sliderReflFord.oninput = function() {
+	// 	reflFord = this.value;
+	// }
 
 }
 function slideRugosite() {
 	var sliderLisseLapin = document.getElementById("lisseLapin");
 	lisseLapin = sliderLisseLapin.value;
+	var outputBu = document.getElementById("rugBunny");
+	outputBu.innerHTML = sliderLisseLapin.value;
 	sliderLisseLapin.oninput = function() {
 		lisseLapin= this.value;
+		outputBu.innerHTML = this.value;
 	}
 	var sliderLisseSphere = document.getElementById("lisseSphere");
 	lisseSphere = sliderLisseSphere.value;
@@ -267,39 +291,63 @@ function slideRugosite() {
 		lisseFord= this.value;
 	}
 }
-function buttonBehaviour(){
-	if(document.getElementById("redLapin").checked) {
-		kdLapin = [0.6,0.1,0.1];
-	}else if(document.getElementById("greenLapin").checked) {
-		kdLapin = [0,1,0];
-	}else if(document.getElementById("blueLapin").checked) {
-		kdLapin = [0,0,1];
-	}
-	if(document.getElementById("redSphere").checked) {
-		kdSphere = [0.6,0.1,0.1];
-	}else if(document.getElementById("greenSphere").checked) {
-		kdSphere = [0,1,0];
-	}else if(document.getElementById("blueSphere").checked) {
-		kdSphere = [0,0,1];
-	}
-	if(document.getElementById("redPorsche").checked) {
-		kdPorsche = [0.6,0.1,0.1];
-	}else if(document.getElementById("greenPorsche").checked) {
-		kdPorsche = [0,1,0];
-	}else if(document.getElementById("bluePorsche").checked) {
-		kdPorsche = [0,0,1];
-	}
-	if(document.getElementById("redFord").checked) {
-		kdFord = [0.6,0.1,0.1];
-	}else if(document.getElementById("greenFord").checked) {
-		kdFord = [0,1,0];
-	}else if(document.getElementById("blueFord").checked) {
-		kdFord = [0,0,1];
-	}
-}
+
+// function slideAlpha() {
+// 	var sliderAlphaLapin = document.getElementById("alphaLapin");
+// 	alphaLapin = sliderAlphaLapin.value;
+// 	sliderAlphaLapin.oninput = function(){
+// 		alphaLapin = this.value;
+// 	}
+// 	var sliderAlphaSphere = document.getElementById("alphaSphere");
+// 	alphaSphere = sliderAlphaSphere.value;
+// 	sliderAlphaSphere.oninput = function(){
+// 		alphaSphere = this.value;
+// 	}
+// 	var sliderAlphaPorsche = document.getElementById("alphaPorsche");
+// 	alphaPorsche = sliderAlphaPorsche.value;
+// 	sliderAlphaPorsche.oninput = function(){
+// 		alphaPorsche = this.value;
+// 	}
+// 	var sliderAlphaFord = document.getElementById("alphaFord");
+// 	alphaFord = sliderAlphaFord.value;
+// 	sliderAlphaFord.oninput = function(){
+// 		alphaFord = this.value;
+// 	}
+// }
+
+// function buttonBehaviour(){
+// 	if(document.getElementById("redLapin").checked) {
+// 		kdLapin = [0.6,0.1,0.1];
+// 	}else if(document.getElementById("greenLapin").checked) {
+// 		kdLapin = [0,1,0];
+// 	}else if(document.getElementById("blueLapin").checked) {
+// 		kdLapin = [0,0,1];
+// 	}
+// 	if(document.getElementById("redSphere").checked) {
+// 		kdSphere = [0.6,0.1,0.1];
+// 	}else if(document.getElementById("greenSphere").checked) {
+// 		kdSphere = [0,1,0];
+// 	}else if(document.getElementById("blueSphere").checked) {
+// 		kdSphere = [0,0,1];
+// 	}
+// 	if(document.getElementById("redPorsche").checked) {
+// 		kdPorsche = [0.6,0.1,0.1];
+// 	}else if(document.getElementById("greenPorsche").checked) {
+// 		kdPorsche = [0,1,0];
+// 	}else if(document.getElementById("bluePorsche").checked) {
+// 		kdPorsche = [0,0,1];
+// 	}
+// 	if(document.getElementById("redFord").checked) {
+// 		kdFord = [0.6,0.1,0.1];
+// 	}else if(document.getElementById("greenFord").checked) {
+// 		kdFord = [0,1,0];
+// 	}else if(document.getElementById("blueFord").checked) {
+// 		kdFord = [0,0,1];
+// 	}
+// }
 
 function refresh() {
-	buttonBehaviour();
+	// buttonBehaviour();
 	slideAlpha();
 	slideReflectance();
 	slideRugosite();
@@ -522,7 +570,7 @@ function drawScene() {
 	OBJ[3].draw2();
 	OBJ[4].draw(kdSphere, alphaSphere, reflSphere, lisseSphere);
 	OBJ[4].draw2();
-	OBJ[0].draw(kdLapin, alphaLapin, reflLapin, lisseLapin);
+	OBJ[0].draw(kdLapin, alphaBunny, reflLapin, lisseLapin);
 	OBJ[0].draw2();
 
 	
