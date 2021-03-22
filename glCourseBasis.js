@@ -58,6 +58,8 @@ var translation =[];
 
 var fogColor = [0.7, 0.7, 0.7, 1.0] ;
 var fogAmount = 0.7;
+
+var fdfLapin, fdfSphere, fdfPorsche, fdfFord = true;
 // =====================================================
 // OBJET 3D, lecture fichier obj
 // =====================================================
@@ -102,9 +104,9 @@ class objmesh {
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.mesh.normalBuffer);
 		gl.vertexAttribPointer(this.shader1.nAttrib, this.mesh.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
-		/*translation = [-0.8,0.0,0.0];
-		this.shader.tAttrib = gl.getUniformLocation(this.shader1.shader, "aTranslation");
-		gl.uniform3fv(this.shader.tAttrib, translation);*/
+		translation = [-0.8,0.0,0.0];
+		this.shader1.tAttrib = gl.getUniformLocation(this.shader1.shader, "aTranslation");
+		gl.uniform3fv(this.shader1.tAttrib, translation);
 
 		this.shader1.rMatrixUniform = gl.getUniformLocation(this.shader1.shader, "uRMatrix");
 		this.shader1.mvMatrixUniform = gl.getUniformLocation(this.shader1.shader, "uMVMatrix");
@@ -145,6 +147,10 @@ class objmesh {
 		gl.enableVertexAttribArray(this.shader2.vAttrib);
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.mesh.vertexBuffer);
 		gl.vertexAttribPointer(this.shader2.vAttrib, this.mesh.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+		translation = [-0.8,0.0,0.0];
+		this.shader2.tAttrib = gl.getUniformLocation(this.shader2.shader, "aTranslation");
+		gl.uniform3fv(this.shader2.tAttrib, translation);
 
 		this.shader2.mvMatrixUniform = gl.getUniformLocation(this.shader2.shader, "uMVMatrix");
 		this.shader2.pMatrixUniform = gl.getUniformLocation(this.shader2.shader, "uPMatrix");
@@ -302,11 +308,44 @@ function buttonBehaviour(){
 	}
 }
 
+function slideFog() {
+	var sliderFog = document.getElementById("fog");
+	fogAmount = sliderFog.value;
+	sliderFog.oninput = function(){
+		fogAmount = this.value;
+	}
+}
+
+function filDeFer() {
+	if(document.getElementById("fdfLapin").checked){
+		fdfLapin = true;
+	}else{
+		fdfLapin = false;
+	}
+	if(document.getElementById("fdfSphere").checked){
+		fdfSphere = true;
+	}else{
+		fdfSphere = false;
+	}
+	if(document.getElementById("fdfPorsche").checked){
+		fdfPorsche = true;
+	}else{
+		fdfPorsche = false;
+	}
+	if(document.getElementById("fdfFord").checked){
+		fdfFord = true;
+	}else{
+		fdfFord = false;
+	}
+}
+
 function refresh() {
 	buttonBehaviour();
 	slideAlpha();
 	slideReflectance();
 	slideRugosite();
+	slideFog();
+	filDeFer();
 	loadShaders(OBJ1);
 	loadShaders(OBJ2);;
 	loadShaders(OBJ3);
@@ -504,17 +543,21 @@ function drawScene() {
 	//PLANE.draw();
 	OBJ2.draw(kdPlan, alphaPlan, reflPlan, lissePlan);
 	OBJ3.draw(kdPorsche, alphaPorsche, reflPorsche, lissePorsche);
+	if(fdfPorsche){
 	OBJ3.draw2();
+	}
 	OBJ4.draw(kdFord, alphaFord, reflFord, lisseFord);
+	if(fdfFord){
 	OBJ4.draw2();
+	}
 	OBJ5.draw(kdSphere, alphaSphere, reflSphere, lisseSphere);
-	OBJ5.draw2();
+	if(fdfSphere){
+		OBJ5.draw2();
+	}
 	OBJ1.draw(kdLapin, alphaLapin, reflLapin, lisseLapin);
-	OBJ1.draw2();
-
-	
-	
-	
+	if(fdfLapin){
+		OBJ1.draw2();
+	}
 }
 
 

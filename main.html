@@ -22,90 +22,121 @@
 			</th>
 			<th>
 				<div>
-					<h4>Lapin</h4>
-					<label>Couleur</label>
-					<form id="kdLapin">
-						<input type="radio" id="redLapin" onclick="refresh()" name="kdLapin" value="red">
-						<label for="red"> Rouge </label><br>
-						<input type="radio" id="greenLapin" onclick="refresh()" name="kdLapin" value="green">
-						<label for="green"> Vert </label><br>
-						<input type="radio" id="blueLapin" onclick="refresh()" name="kdLapin" value="blue">
-						<label for="blue"> Bleu </label><br>
-					</form>
-					<label>Alpha</label>
-					<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.30" class="slider" id="alphaLapin">
-					<br>
-					<label>Brillance</label>
-					<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.60" class="slider" id="brillanceLapin">
-					<br>
-					<label>Rugosité</label>
-					<input type="range" min="1" max="500" step="5" onclick="refresh()" value="100" class="slider" id="lisseLapin">
-					<form id="filDeFer">
-						<label for="filDeFer"> fil de fer</label>
-						<input type="checkbox" id="redLapin" onclick="refresh()" name="filDeFer" value="true"><br>
+					<h4>Scene</h4>
+					<form>
+						<label for="fog"> Brouillard</label>
+						<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.70" class="slider" id="fog">
 					</form>
 				</div>
 				<div>
+					<a href="">Lapin</a><br>
+					<label for="visibleLapin">Afficher</label>
+					<input type="checkbox" in="afficheLapin" onclick="" name="afficheLapin" checked><br>
+					<div>
+						<label>Couleur</label>
+						<form id="kdLapin">
+							<input type="radio" id="redLapin" onclick="refresh()" name="kdLapin" value="red">
+							<label for="red"> Rouge </label><br>
+							<input type="radio" id="greenLapin" onclick="refresh()" name="kdLapin" value="green">
+							<label for="green"> Vert </label><br>
+							<input type="radio" id="blueLapin" onclick="refresh()" name="kdLapin" value="blue">
+							<label for="blue"> Bleu </label><br>
+						</form>
+						<label>Alpha</label>
+						<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.30" class="slider" id="alphaLapin">
+						<br>
+						<label>Brillance</label>
+						<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.60" class="slider" id="brillanceLapin">
+						<br>
+						<label>Rugosité</label>
+						<input type="range" min="1" max="500" step="5" onclick="refresh()" value="100" class="slider" id="lisseLapin">
+						<br>
+						<label for="filDeFer"> fil de fer</label>
+						<input type="checkbox" id="fdfLapin" onclick="refresh()" name="filDeFer" checked><br>
+					</div>	
+				</div>
+				<div>
 					<h4>Sphère</h4>
-					<label>Couleur</label>
-					<form id="kdSphere">
-						<input type="radio" id="redSphere" onclick="refresh()" name="kdSphere" value="red">
-						<label for="redSphere"> Rouge </label><br>
-						<input type="radio" id="greenSphere" onclick="refresh()" name="kdSphere" value="green">
-						<label for="greenSphere"> Vert </label><br>
-						<input type="radio" id="blueSphere" onclick="refresh()" name="kdSphere" value="blue">
-						<label for="blueSphere"> Bleu </label><br>
-					</form>
-					<label>Alpha</label>
-					<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.30" class="slider" id="alphaSphere">
-					<br>
-					<label>Brillance</label>
-					<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.60" class="slider" id="brillanceSphere">
-					<br>
-					<label>Rugosité</label>
-					<input type="range" min="1" max="500" step="5" onclick="refresh()" value="100" class="slider" id="lisseSphere">
+					<label for="visibleSphere">Afficher</label>
+					<input type="checkbox" in="afficheSphere" onclick="" name="afficheSphere" checked><br>
+					<div>
+						<label>Couleur</label>
+						<form id="kdSphere">
+							<input type="radio" id="redSphere" onclick="refresh()" name="kdSphere" value="red">
+							<label for="redSphere"> Rouge </label><br>
+							<input type="radio" id="greenSphere" onclick="refresh()" name="kdSphere" value="green">
+							<label for="greenSphere"> Vert </label><br>
+							<input type="radio" id="blueSphere" onclick="refresh()" name="kdSphere" value="blue">
+							<label for="blueSphere"> Bleu </label><br>
+						</form>
+						<label>Alpha</label>
+						<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.30" class="slider" id="alphaSphere">
+						<br>
+						<label>Brillance</label>
+						<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.60" class="slider" id="brillanceSphere">
+						<br>
+						<label>Rugosité</label>
+						<input type="range" min="1" max="500" step="5" onclick="refresh()" value="100" class="slider" id="lisseSphere">
+						<br>
+						<label for="filDeFer"> fil de fer</label>
+						<input type="checkbox" id="fdfSphere" onclick="refresh()" name="filDeFer" checked><br>
+					</div>
 				</div>
 			</th>
 			<th>
 				<div>
 					<h4>Porsche</h4>
-					<label>Couleur</label>
-					<form id="kdPorshe">
-						<input type="radio" id="redPorsche" onclick="refresh()" name="kdPorsche" value="red">
-						<label for="redPorsche"> Rouge </label><br>
-						<input type="radio" id="greenPorsche" onclick="refresh()" name="kdPorsche" value="green">
-						<label for="greenPorsche"> Vert </label><br>
-						<input type="radio" id="bluePorsche" onclick="refresh()" name="kdPorsche" value="blue">
-						<label for="bluePorsche"> Bleu </label><br>
-					</form>
-					<label>Alpha</label>
-					<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.30" class="slider" id="alphaPorsche">
-					<br>
-					<label>Brillance</label>
-					<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.60" class="slider" id="brillancePorsche">
-					<br>
-					<label>Rugosité</label>
-					<input type="range" min="1" max="500" step="5" onclick="refresh()" value="100" class="slider" id="lissePorsche">
+					<label for="visiblePorsche">Afficher</label>
+					<input type="checkbox" in="affichePorsche" onclick="" name="affichePorsche" checked><br>
+					<div>
+						<label>Couleur</label>
+						<form id="kdPorshe">
+							<input type="radio" id="redPorsche" onclick="refresh()" name="kdPorsche" value="red">
+							<label for="redPorsche"> Rouge </label><br>
+							<input type="radio" id="greenPorsche" onclick="refresh()" name="kdPorsche" value="green">
+							<label for="greenPorsche"> Vert </label><br>
+							<input type="radio" id="bluePorsche" onclick="refresh()" name="kdPorsche" value="blue">
+							<label for="bluePorsche"> Bleu </label><br>
+						</form>
+						<label>Alpha</label>
+						<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.30" class="slider" id="alphaPorsche">
+						<br>
+						<label>Brillance</label>
+						<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.60" class="slider" id="brillancePorsche">
+						<br>
+						<label>Rugosité</label>
+						<input type="range" min="1" max="500" step="5" onclick="refresh()" value="100" class="slider" id="lissePorsche">
+						<br>
+						<label for="filDeFer"> fil de fer</label>
+						<input type="checkbox" id="fdfPorsche" onclick="refresh()" name="filDeFer" checked><br>
+					</div>
 				</div>
 				<div>
 					<h4>Ford</h4>
-					<label>Couleur</label>
-					<form id="kdFord">
-						<input type="radio" id="redFord" onclick="refresh()" name="kdFord" value="red">
-						<label for="redFord"> Rouge </label><br>
-						<input type="radio" id="greenFord" onclick="refresh()" name="kdFord" value="green">
-						<label for="greenFord"> Vert </label><br>
-						<input type="radio" id="blueFord" onclick="refresh()" name="kdFord" value="blue">
-						<label for="blueFord"> Bleu </label><br>
-					</form>
-					<label>Alpha</label>
-					<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.30" class="slider" id="alphaFord">
-					<br>
-					<label>Brillance</label>
-					<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.60" class="slider" id="brillanceFord">
-					<br>
-					<label>Rugosité</label>
-					<input type="range" min="1" max="500" step="5" onclick="refresh()" value="100" class="slider" id="lisseFord">
+					<label for="visibleFord">Afficher</label>
+					<input type="checkbox" in="afficheFord" onclick="" name="afficheFord" checked><br>
+					<div>
+						<label>Couleur</label>
+						<form id="kdFord">
+							<input type="radio" id="redFord" onclick="refresh()" name="kdFord" value="red">
+							<label for="redFord"> Rouge </label><br>
+							<input type="radio" id="greenFord" onclick="refresh()" name="kdFord" value="green">
+							<label for="greenFord"> Vert </label><br>
+							<input type="radio" id="blueFord" onclick="refresh()" name="kdFord" value="blue">
+							<label for="blueFord"> Bleu </label><br>
+						</form>
+						<label>Alpha</label>
+						<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.30" class="slider" id="alphaFord">
+						<br>
+						<label>Brillance</label>
+						<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.60" class="slider" id="brillanceFord">
+						<br>
+						<label>Rugosité</label>
+						<input type="range" min="1" max="500" step="5" onclick="refresh()" value="100" class="slider" id="lisseFord">
+						<br>
+						<label for="filDeFer"> fil de fer</label>
+						<input type="checkbox" id="fdfFord" onclick="refresh()" name="filDeFer" checked><br>
+					</div>
 				</div>
 			</th>
 		</tr>	
