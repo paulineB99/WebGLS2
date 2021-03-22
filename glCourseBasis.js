@@ -8,14 +8,10 @@ var pMatrix = mat4.create();
 var rotMatrix = mat4.create();
 var distCENTER;
 // =====================================================
+var OBJ = [];
+OBJ.push("OBJ1", "OBJ2", "OBJ3", "OBJ4", "OBJ5", "OBJ6");
 
-var OBJ1 = null;
 var PLANE = null;
-var OBJ2 = null;
-var OBJ3 = null;
-var OBJ4 = null;
-var OBJ5 = null;
-var OBJ6 = null;
 
 // =====================================================
 
@@ -307,11 +303,11 @@ function refresh() {
 	slideAlpha();
 	slideReflectance();
 	slideRugosite();
-	loadShaders(OBJ1);
-	loadShaders(OBJ2);;
-	loadShaders(OBJ3);
-	loadShaders(OBJ4);
-	loadShaders(OBJ5);
+	loadShaders(OBJ[0]);
+	loadShaders(OBJ[1]);;
+	loadShaders(OBJ[2]);
+	loadShaders(OBJ[3]);
+	loadShaders(OBJ[4]);
 	console.log("refresh");
 }
 
@@ -482,11 +478,14 @@ function webGLStart() {
 	distCENTER = vec3.create([0,-0.2,-5]);
 	
 	//PLANE = new plane();
-	OBJ1 = new objmesh('bunny.obj');
-	OBJ2 = new objmesh('plane.obj');
-	OBJ3 = new objmesh('porsche.obj');
-	OBJ4 = new objmesh('ford.obj');
-	OBJ5 = new objmesh('sphere.obj');
+
+	OBJ[0] = new objmesh('bunny.obj');
+	OBJ[1] = new objmesh('plane.obj');
+	OBJ[2] = new objmesh('porsche.obj');
+	OBJ[3] = new objmesh('ford.obj');
+	OBJ[4] = new objmesh('sphere.obj');
+
+	
 
 	
 	//Si on veut ajouter un obj on creer juste un nouvel objet et on l'appel dans drawScene
@@ -498,19 +497,33 @@ function webGLStart() {
 }
 
 // =====================================================
+
+function SelectAnObject(OBJ){
+	for(var i=0; i<OBJ.length; i++) {  
+		text = "<li>" + fruits[i] + "</li>";
+	}
+	text += "</ul>";
+
+document.getElementById("selectNumber").innerHTML = text;
+}
+
+console.log(OBJ);
+OBJ.sort();
+// =====================================================
+
 function drawScene() {
 	// A chaque fois qu'on actulaise la scene on efface l'image et on rédessine le plan et l'objet
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	//PLANE.draw();
-	OBJ2.draw(kdPlan, alphaPlan, reflPlan, lissePlan);
-	OBJ3.draw(kdPorsche, alphaPorsche, reflPorsche, lissePorsche);
-	OBJ3.draw2();
-	OBJ4.draw(kdFord, alphaFord, reflFord, lisseFord);
-	OBJ4.draw2();
-	OBJ5.draw(kdSphere, alphaSphere, reflSphere, lisseSphere);
-	OBJ5.draw2();
-	OBJ1.draw(kdLapin, alphaLapin, reflLapin, lisseLapin);
-	OBJ1.draw2();
+	OBJ[1].draw(kdPlan, alphaPlan, reflPlan, lissePlan);
+	OBJ[2].draw(kdPorsche, alphaPorsche, reflPorsche, lissePorsche);
+	OBJ[2].draw2();
+	OBJ[3].draw(kdFord, alphaFord, reflFord, lisseFord);
+	OBJ[3].draw2();
+	OBJ[4].draw(kdSphere, alphaSphere, reflSphere, lisseSphere);
+	OBJ[4].draw2();
+	OBJ[0].draw(kdLapin, alphaLapin, reflLapin, lisseLapin);
+	OBJ[0].draw2();
 
 	
 	
