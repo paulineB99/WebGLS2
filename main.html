@@ -15,47 +15,48 @@
 
 <body onload="webGLStart();">
 <table>
-	<div class = "Canva">
-		<tr>
-			<th>	
-				<canvas id="WebGL-test" style="border:none;" width="1000" height="800" ></canvas>
-			</th>
+	<tr class = "Canva"> 
+		<th >
+						
+						<canvas id="WebGL-test" style="border:none;" width="1000" height="800" ></canvas>
+					</th>
 
-			</tr>
-	</div>
-
-	<div class ="partieButt">
-		<h2>Projet WebGL-M1- Gphy Imageur</h2> <br> 
-		<h3>
-			<label>Liste des objets : </label>
-			<select id="selectNumber">
-				<option  class = "leFormulaire">Choisir un objet </option>
-				<a>"SelectAnObject(OBJ)"</a>
-			</select>
-		</h3>		
-		
-		
-		<h3> 
-			<p><label> Alpha : </label> <span id="demoBunny">0.5</span>
-				<br>
-				<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.50" class="slider" id="alphaBunny">
-			</p>
-			<p>
-				<label>Reflectance</label>  <span id="brillanceLapin">0.5</span>
-				<br>
-				<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.50" class="slider" id="reflLapin">
-			</p>
-
-			<p> 
-				<label>Rugosité</label>  <span id="rugBunny">0.5</span>
-				<br>
-				<input type="range" min="0" max="1" step="0.05" onclick="refresh()" value="0.50" class="slider" id="lisseLapin">			
-			</p>
-		</h3>			
+					</tr>
+		</th>
+		<th class ="partieButt"> 
+			
+				<h2>Projet WebGL-M1- Gphy Imageur</h2> <br> 
+				<h3>
+					<label>Liste des objets : </label>
+					<select id="selectNumber">
+						<option  class = "leFormulaire">Choisir un objet </option>
+						<a>"SelectAnObject(OBJ)"</a>
+					</select>
+				</h3>		
 				
-			</p>
-	</div>
+				
+				<h3> 
+					<p><label> Alpha : </label> <span id="demoBunny">0.5</span>
+						<br>
+						<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.50" class="slider" id="alphaBunny">
+					</p>
+					<p>
+						<label>Reflectance</label>  <span id="brillanceLapin">0.5</span>
+						<br>
+						<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.50" class="slider" id="reflLapin">
+					</p>
 
+					<p> 
+						<label>Rugosité</label>  <span id="rugBunny">0.5</span>
+						<br>
+						<input type="range" min="0" max="1" step="0.05" onclick="refresh()" value="0.50" class="slider" id="lisseLapin">			
+					</p>
+				</h3>			
+						
+					</p>
+			
+</th>
+</tr>
 </table>
 			
 			
