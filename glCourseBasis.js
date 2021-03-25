@@ -57,6 +57,9 @@ var translation =[];
 
 var fogColor = [0.7, 0.7, 0.7, 1.0] ;
 var fogAmount = 0.7;
+
+var fdfLapin, fdfSphere, fdfPorsche, fdfFord = true;
+
 // =====================================================
 // OBJET 3D, lecture fichier obj
 // =====================================================
@@ -101,9 +104,9 @@ class objmesh {
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.mesh.normalBuffer);
 		gl.vertexAttribPointer(this.shader1.nAttrib, this.mesh.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
-		/*translation = [-0.8,0.0,0.0];
-		this.shader.tAttrib = gl.getUniformLocation(this.shader1.shader, "aTranslation");
-		gl.uniform3fv(this.shader.tAttrib, translation);*/
+		translation = [-0.8,0.0,0.0];
+		this.shader1.tAttrib = gl.getUniformLocation(this.shader1.shader, "aTranslation");
+		gl.uniform3fv(this.shader1.tAttrib, translation);
 
 		this.shader1.rMatrixUniform = gl.getUniformLocation(this.shader1.shader, "uRMatrix");
 		this.shader1.mvMatrixUniform = gl.getUniformLocation(this.shader1.shader, "uMVMatrix");
@@ -144,6 +147,10 @@ class objmesh {
 		gl.enableVertexAttribArray(this.shader2.vAttrib);
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.mesh.vertexBuffer);
 		gl.vertexAttribPointer(this.shader2.vAttrib, this.mesh.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+		translation = [-0.8,0.0,0.0];
+		this.shader2.tAttrib = gl.getUniformLocation(this.shader2.shader, "aTranslation");
+		gl.uniform3fv(this.shader2.tAttrib, translation);
 
 		this.shader2.mvMatrixUniform = gl.getUniformLocation(this.shader2.shader, "uMVMatrix");
 		this.shader2.pMatrixUniform = gl.getUniformLocation(this.shader2.shader, "uPMatrix");
@@ -196,7 +203,7 @@ class objmesh {
 // FONCTIONS POUR L'INTERFACE
 // =====================================================
 
-
+		// Fonction de selection d'un objet dans le menu déroulant
 function SelectAnObject( value){
 	if (value=="Porsche"){
 		kdPorsche=[0,0,1];
@@ -229,10 +236,6 @@ function SelectAnObject( value){
 }
 
 
-	
-
-// =====================================================
-
 
 function initiatButton(){
 	document.getElementById("redLapin").checked = true;
@@ -241,7 +244,10 @@ function initiatButton(){
 	document.getElementById("redFord").checked = true;
 }
 
- function slideAlpha(m) { //TODO : Corriger les petites erreurs (lorsqu'on clique plusieurs fois alternativement, l'action s'applique à deux objets en simmultané)
+
+		// ===== Fonctions de mise à jour du bouton alpha, reflectance et  rugosité
+
+function slideAlpha(m) { //TODO : Corriger les petites erreurs (lorsqu'on clique plusieurs fois alternativement, l'action s'applique à deux objets en simmultané)
 	//initialisation du boutton "alpha" sur la sphère
 	if (m==OBJ[4]){
 		var sliderAlphaSphere  = document.getElementById("alphaB");
@@ -281,8 +287,6 @@ function initiatButton(){
 		}
 	}
 }
-
-
 
 function slideReflectance(m) {
 	//initialisation du  boutton "Reflectance" sur la Sphère
@@ -374,6 +378,47 @@ function slideRugosite(m) {
 	}
 }
 
+			// Fonction de mise à jour du Frog
+
+// function slideFog() {
+// 	var sliderFog = document.getElementById("fog");
+// 	fogAmount = sliderFog.value;
+// 	sliderFog.oninput = function(){
+// 		fogAmount = this.value;
+// 	}
+// }
+
+		// Fonction de mise à jour du fil de fer
+function filDeFer() {
+	if (m==OBJ[4]){ 
+		if(document.getElementById("fdf").checked){
+			fdfSphere = true;
+		}else{
+			fdfSphere = false;
+		}
+	}else if (m==OBJ[3]){
+		if(document.getElementById("fdf").checked){
+				fdfFord = true;
+		}else{
+				fdfFord = false;
+		}
+	} else if (m==OBJ[2]){ 
+		if(document.getElementById("fdf").checked){
+					fdfPorsche = true;
+		}else{
+				fdfPorsche = false;
+		}
+
+	} else if (m==OBJ[0]){ 
+		if(document.getElementById("fdf").checked){
+					fdfLapin = true;
+		}else{
+					fdfLapin = false;
+		}
+	}		
+		
+}
+
 function buttonBehaviour(){
 	if(document.getElementById("redLapin").checked) {
 		kdLapin = [0.6,0.1,0.1];
@@ -411,6 +456,8 @@ function refresh() {
 	slideAlpha(m);
 	slideReflectance(m);
 	slideRugosite(m);
+	// slideFog();
+	filDeFer();
 	loadShaders(OBJ[0]);
 	loadShaders(OBJ[1]);;
 	loadShaders(OBJ[2]);
@@ -583,7 +630,7 @@ function webGLStart() {
 	mat4.rotate(rotMatrix, rotY, [0, 0, 1]);
 
 	//point d'observation
-	distCENTER = vec3.create([0,-0.2,-5]);
+	distCENTER = vec3.create([0.8,-0.2,-10]);
 	
 	//PLANE = new plane();
 
@@ -613,13 +660,22 @@ function drawScene() {
 	//PLANE.draw();
 	OBJ[1].draw(kdPlan, alphaPlan, reflPlan, lissePlan);
 	OBJ[2].draw(kdPorsche, alphaPorsche, reflPorsche, lissePorsche);
-	OBJ[2].draw2();
+	if(fdfPorsche){
+		OBJ[2].draw2();
+	}
 	OBJ[3].draw(kdFord, alphaFord, reflFord, lisseFord);
-	OBJ[3].draw2();
+	if(fdfFord){
+		OBJ[3].draw2();
+	}
 	OBJ[4].draw(kdSphere, alphaSphere, reflSphere, lisseSphere);
-	OBJ[4].draw2();
+	if(fdfSphere){
+		OBJ[4].draw2();
+	}
 	OBJ[0].draw(kdLapin, alphaBunny, reflLapin, lisseLapin);
-	OBJ[0].draw2();
+	if(fdfLapin){
+		OBJ[0].draw2();
+	}
+
 
 	
 	

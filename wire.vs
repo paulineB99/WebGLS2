@@ -1,4 +1,5 @@
 attribute vec3 aVertexPosition;
+uniform vec3 aTranslation;
 
 uniform mat4 uMVMatrix;
 uniform mat4 uPMatrix;
@@ -13,5 +14,5 @@ void main(void) {
 	fogColor = uFogColor;
 	fogAmount = uFogAmount;
 
-	gl_Position = uPMatrix* uMVMatrix * vec4(aVertexPosition, 1.0);
+	gl_Position = uPMatrix* uMVMatrix * vec4(aVertexPosition + aTranslation,1.0);
 }
