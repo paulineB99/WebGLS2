@@ -25,14 +25,14 @@
 					<h4>Scene</h4>
 					<form>
 						<label for="fog"> Brouillard</label>
-						<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.70" class="slider" id="fog">
+						<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.00" class="slider" id="fog">
 					</form>
 				</div>
 				<div>
-					<a href="">Lapin</a><br>
+					<h4 class ="centrerLapin" onclick="">Lapin</h4>
 					<label for="visibleLapin">Afficher</label>
-					<input type="checkbox" in="afficheLapin" onclick="" name="afficheLapin" checked><br>
-					<div>
+					<input type="checkbox" id="afficheLapin" onclick="refresh()" name="visibleLapin" checked><br>
+					<div class="lapin">
 						<label>Couleur</label>
 						<form id="kdLapin">
 							<input type="radio" id="redLapin" onclick="refresh()" name="kdLapin" value="red">
@@ -58,7 +58,7 @@
 				<div>
 					<h4>Sphère</h4>
 					<label for="visibleSphere">Afficher</label>
-					<input type="checkbox" in="afficheSphere" onclick="" name="afficheSphere" checked><br>
+					<input type="checkbox" id="afficheSphere" onclick="refresh()" name="visibleSphere" checked><br>
 					<div>
 						<label>Couleur</label>
 						<form id="kdSphere">
@@ -87,7 +87,7 @@
 				<div>
 					<h4>Porsche</h4>
 					<label for="visiblePorsche">Afficher</label>
-					<input type="checkbox" in="affichePorsche" onclick="" name="affichePorsche" checked><br>
+					<input type="checkbox" id="affichePorsche" onclick="refresh()" name="visiblePorsche" checked><br>
 					<div>
 						<label>Couleur</label>
 						<form id="kdPorshe">
@@ -114,7 +114,7 @@
 				<div>
 					<h4>Ford</h4>
 					<label for="visibleFord">Afficher</label>
-					<input type="checkbox" in="afficheFord" onclick="" name="afficheFord" checked><br>
+					<input type="checkbox" id="afficheFord" onclick="refresh()" name="visibleFord" checked><br>
 					<div>
 						<label>Couleur</label>
 						<form id="kdFord">

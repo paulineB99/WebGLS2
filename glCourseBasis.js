@@ -9,8 +9,8 @@ var rotMatrix = mat4.create();
 var distCENTER;
 // =====================================================
 
-var OBJ1 = null;
 var PLANE = null;
+var OBJ1 = null;
 var OBJ2 = null;
 var OBJ3 = null;
 var OBJ4 = null;
@@ -57,9 +57,16 @@ var lissePlan = 1.0;
 var translation =[];
 
 var fogColor = [0.7, 0.7, 0.7, 1.0] ;
-var fogAmount = 0.7;
+var fogAmount = 0.0;
 
-var fdfLapin, fdfSphere, fdfPorsche, fdfFord = true;
+var visibleLapin = true;
+var visibleSphere = true;
+var visiblePorsche = true;
+var visibleFord = true;
+var fdfLapin = true;
+var fdfSphere = true;
+var fdfPorsche = true;
+var fdfFord = true;
 // =====================================================
 // OBJET 3D, lecture fichier obj
 // =====================================================
@@ -104,7 +111,6 @@ class objmesh {
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.mesh.normalBuffer);
 		gl.vertexAttribPointer(this.shader1.nAttrib, this.mesh.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
-		translation = [-0.8,0.0,0.0];
 		this.shader1.tAttrib = gl.getUniformLocation(this.shader1.shader, "aTranslation");
 		gl.uniform3fv(this.shader1.tAttrib, translation);
 
@@ -148,7 +154,6 @@ class objmesh {
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.mesh.vertexBuffer);
 		gl.vertexAttribPointer(this.shader2.vAttrib, this.mesh.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
-		translation = [-0.8,0.0,0.0];
 		this.shader2.tAttrib = gl.getUniformLocation(this.shader2.shader, "aTranslation");
 		gl.uniform3fv(this.shader2.tAttrib, translation);
 
@@ -209,7 +214,6 @@ function initiatButton(){
 	document.getElementById("redPorsche").checked = true;
 	document.getElementById("redFord").checked = true;
 }
-
 function slideAlpha() {
 	var sliderAlphaLapin = document.getElementById("alphaLapin");
 	alphaLapin = sliderAlphaLapin.value;
@@ -307,7 +311,6 @@ function buttonBehaviour(){
 		kdFord = [0,0,1];
 	}
 }
-
 function slideFog() {
 	var sliderFog = document.getElementById("fog");
 	fogAmount = sliderFog.value;
@@ -315,7 +318,6 @@ function slideFog() {
 		fogAmount = this.value;
 	}
 }
-
 function filDeFer() {
 	if(document.getElementById("fdfLapin").checked){
 		fdfLapin = true;
@@ -338,7 +340,6 @@ function filDeFer() {
 		fdfFord = false;
 	}
 }
-
 function refresh() {
 	buttonBehaviour();
 	slideAlpha();
@@ -346,6 +347,7 @@ function refresh() {
 	slideRugosite();
 	slideFog();
 	filDeFer();
+	setVisible();
 	loadShaders(OBJ1);
 	loadShaders(OBJ2);;
 	loadShaders(OBJ3);
@@ -354,6 +356,32 @@ function refresh() {
 	console.log("refresh");
 }
 
+function setVisible(){
+	if(document.getElementById("afficheLapin").checked) {
+		visibleLapin = true;
+	}else{
+		visibleLapin = false;
+	}
+	if(document.getElementById("afficheSphere").checked) {
+		visibleSphere = true;
+	}else{
+		visibleSphere = false;
+	}
+	if(document.getElementById("affichePorsche").checked) {
+		visiblePorsche = true;
+	}else{
+		visiblePorsche = false;
+	}
+	if(document.getElementById("afficheFord").checked) {
+		visibleFord = true;
+	}else{
+		visibleFord = false;
+	}
+}
+
+function center(){
+
+}
 // =====================================================
 // FONCTIONS GENERALES, INITIALISATIONS
 // =====================================================
@@ -542,21 +570,29 @@ function drawScene() {
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	//PLANE.draw();
 	OBJ2.draw(kdPlan, alphaPlan, reflPlan, lissePlan);
-	OBJ3.draw(kdPorsche, alphaPorsche, reflPorsche, lissePorsche);
-	if(fdfPorsche){
-	OBJ3.draw2();
+	if (visiblePorsche){
+		OBJ3.draw(kdPorsche, alphaPorsche, reflPorsche, lissePorsche);
+		if(fdfPorsche){
+		OBJ3.draw2();
+		}
 	}
-	OBJ4.draw(kdFord, alphaFord, reflFord, lisseFord);
-	if(fdfFord){
-	OBJ4.draw2();
+	if(visibleFord){
+		OBJ4.draw(kdFord, alphaFord, reflFord, lisseFord);
+		if(fdfFord){
+		OBJ4.draw2();
+		}
 	}
-	OBJ5.draw(kdSphere, alphaSphere, reflSphere, lisseSphere);
-	if(fdfSphere){
-		OBJ5.draw2();
+	if(visibleSphere){
+		OBJ5.draw(kdSphere, alphaSphere, reflSphere, lisseSphere);
+		if(fdfSphere){
+			OBJ5.draw2();
+		}
 	}
-	OBJ1.draw(kdLapin, alphaLapin, reflLapin, lisseLapin);
-	if(fdfLapin){
-		OBJ1.draw2();
+	if(visibleLapin){
+		OBJ1.draw(kdLapin, alphaLapin, reflLapin, lisseLapin);
+		if(fdfLapin){
+			OBJ1.draw2();
+		}
 	}
 }
 
