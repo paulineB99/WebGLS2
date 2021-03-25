@@ -13,28 +13,34 @@
 </head>
 
 
-<body onload="webGLStart();">
+<body onload="webGLStart();" >
 <table>
 	<tr class = "Canva"> 
 		<th >			
 			<canvas id="WebGL-test" style="border:none;" width="1000" height="800" ></canvas>
 		</th>
-		<th class ="partieButt"> 
+		<th class ="partieButt"  onclick="refresh()"> 
 			
 				<h2>Projet WebGL-M1- Gphy Imageur</h2> <br> 
 				<h3>
 					<label>Liste des objets : </label>
-					<select id="selectNumber">
-						<option  class = "leFormulaire">Choisir un objet </option>
-						<a>"SelectAnObject(OBJ)"</a>
+					<select id="objetc_Select"  onclick="refresh()">
+
+						<option  value = "" >Choisir un objet </option>
+						<option value = "Bunny" id= "first" onclick="SelectAnObject('Bunny')">Bunny</option>
+						<option value = "Porsche" id ="second" onclick="SelectAnObject('Porsche')">Porsche</option>
+						<option value = "Ford" id= "third" onclick="SelectAnObject('Ford')">Ford</option>
+						<option value = "Sphere" id ="four" onclick="SelectAnObject('Sphere')">Sphere</option>
+
+
 					</select>
 				</h3>		
 				
 				
 				<h3> 
-					<p><label> Alpha : </label> <span id="demoBunny">0.5</span>
+					<p><label> Alpha : </label> <span id="demo">0.5</span>
 						<br>
-						<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.50" class="slider" id="alphaBunny">
+						<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.50" class="slider" id="alphaB">
 					</p>
 					<p>
 						<label>Reflectance</label>  <span id="brillanceLapin">0.5</span>
