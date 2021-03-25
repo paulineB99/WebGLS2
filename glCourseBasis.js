@@ -380,13 +380,16 @@ function slideRugosite(m) {
 
 			// Fonction de mise à jour du Frog
 
-// function slideFog() {
-// 	var sliderFog = document.getElementById("fog");
-// 	fogAmount = sliderFog.value;
-// 	sliderFog.oninput = function(){
-// 		fogAmount = this.value;
-// 	}
-// }
+function slideFog() {
+	var sliderFog = document.getElementById("fog");
+	fogAmount = sliderFog.value;
+	var outputFog = document.getElementById("theFog");
+	outputFog.innerHTML = sliderFog.value;
+	sliderFog.oninput = function(){
+		fogAmount = this.value;
+		outputFog.innerHTML = this.value;
+	}
+}
 
 		// Fonction de mise à jour du fil de fer
 function filDeFer() {
@@ -456,7 +459,7 @@ function refresh() {
 	slideAlpha(m);
 	slideReflectance(m);
 	slideRugosite(m);
-	// slideFog();
+	slideFog();
 	filDeFer();
 	loadShaders(OBJ[0]);
 	loadShaders(OBJ[1]);;
