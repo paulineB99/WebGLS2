@@ -56,7 +56,7 @@ var lissePlan = 1.0;
 var translation =[];
 
 var fogColor = [0.7, 0.7, 0.7, 1.0] ;
-var fogAmount = 0.7;
+var fogAmount = 0.1;
 
 var fdfLapin, fdfSphere, fdfPorsche, fdfFord = true;
 
