@@ -26,7 +26,7 @@
 					<label>Liste des objets : </label>
 					<select id="objetc_Select"  onclick="refresh()">
 
-						<option  value = "" >Choisir un objet </option>
+						<option  value = ""  onclick="refresh()">Choisir un objet </option>
 						<option value = "Bunny" id= "first" onclick="SelectAnObject('Bunny')">Bunny</option>
 						<option value = "Porsche" id ="second" onclick="SelectAnObject('Porsche')">Porsche</option>
 						<option value = "Ford" id= "third" onclick="SelectAnObject('Ford')">Ford</option>
@@ -43,15 +43,15 @@
 						<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.50" class="slider" id="alphaB">
 					</p>
 					<p>
-						<label>Reflectance</label>  <span id="brillanceLapin">0.5</span>
+						<label>Reflectance</label>  <span id="brillance">0.5</span>
 						<br>
-						<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.50" class="slider" id="reflLapin">
+						<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.50" class="slider" id="refl">
 					</p>
 
 					<p> 
-						<label>Rugosité</label>  <span id="rugBunny">0.5</span>
+						<label>Rugosité</label>  <span id="rug">0.5</span>
 						<br>
-						<input type="range" min="0" max="1" step="0.05" onclick="refresh()" value="0.50" class="slider" id="lisseLapin">			
+						<input type="range" min="0" max="1" step="0.05" onclick="refresh()" value="0.50" class="slider" id="lisse">			
 					</p>
 				</h3>			
 						

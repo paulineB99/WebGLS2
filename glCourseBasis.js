@@ -242,7 +242,7 @@ function initiatButton(){
 }
 
  function slideAlpha(m) { //TODO : Corriger les petites erreurs (lorsqu'on clique plusieurs fois alternativement, l'action s'applique à deux objets en simmultané)
-	//initialisation des bouttons "alpha" sur la sphère
+	//initialisation du boutton "alpha" sur la sphère
 	if (m==OBJ[4]){
 		var sliderAlphaSphere  = document.getElementById("alphaB");
 		alphaSphere = sliderAlphaSphere.value;
@@ -252,7 +252,7 @@ function initiatButton(){
 			alphaSphere = this.value;
 			outputSphere.innerHTML = this.value;
 		}
-	}else if(m==OBJ[3]){  	//initialisation des bouttons "alpha" sur la Ford
+	}else if(m==OBJ[3]){  	//initialisation du  boutton "alpha" sur la Ford
 		var sliderAlphaFord = document.getElementById("alphaB");
 		alphaFord = sliderAlphaFord.value;
 		var outputFord = document.getElementById("demo");
@@ -261,7 +261,7 @@ function initiatButton(){
 			alphaFord = this.value;
 			outputFord.innerHTML = this.value;
 		}
-	} else if (m==OBJ[2]){  	//initialisation des bouttons "alpha" sur la Porsche
+	} else if (m==OBJ[2]){  	//initialisation du boutton "alpha" sur la Porsche
 		var sliderAlphaPorsche = document.getElementById("alphaB");
 		alphaPorsche = sliderAlphaPorsche.value;
 		var outputPorsche = document.getElementById("demo");
@@ -270,7 +270,7 @@ function initiatButton(){
 			alphaPorsche = this.value;
 			outputPorsche.innerHTML = this.value;
 		}
-	}else if (m==OBJ[0]){  	//initialisation des bouttons "alpha" sur le Bunny
+	}else if (m==OBJ[0]){  	//initialisation du boutton "alpha" sur le Bunny
 		var sliderAlphaBunny  = document.getElementById("alphaB");
 		alphaBunny = sliderAlphaBunny.value;
 		var outputBunny = document.getElementById("demo");
@@ -284,60 +284,95 @@ function initiatButton(){
 
 
 
-// function slideReflectance() {
+function slideReflectance(m) {
+	//initialisation du  boutton "Reflectance" sur la Sphère
+	if (m==OBJ[4]){
+		var sliderAlphaSphere = document.getElementById("refl");
+		reflSphere = sliderAlphaSphere.value;
+		var outputS = document.getElementById("brillance");
+		outputS.innerHTML = sliderAlphaSphere.value;
+		sliderAlphaSphere.oninput = function() {
+			reflSphere = this.value;
+			outputS.innerHTML = this.value;
 
-// 	var sliderReflLapin = document.getElementById("reflLapin");
-// 	reflLapin = sliderReflLapin.value;
-// 	var outputB = document.getElementById("brillanceLapin");
-// 	outputB.innerHTML = sliderReflLapin.value;
-// 	sliderReflLapin.oninput = function() {
-// 		reflLapin = this.value;
-// 		outputB.innerHTML = this.value;
+		}
+	}else if (m==OBJ[3]){ 	//initialisation du  boutton "Reflectance" sur la Ford
+		var sliderAlphaFord = document.getElementById("refl");
+		reflFord = sliderAlphaFord.value;
+		var outputF = document.getElementById("brillance");
+		outputF.innerHTML = sliderAlphaFord.value;
+		sliderAlphaFord.oninput = function() {
+			reflFord = this.value;
+			outputF.innerHTML = this.value;
 
-// 	}
-// 	// var sliderReflSphere = document.getElementById("brillanceSphere");
-// 	// reflSphere = sliderReflSphere.value;
-// 	// sliderReflSphere.oninput = function() {
-// 	// 	reflSphere = this.value;
-// 	// }
-// 	// var sliderReflPorsche = document.getElementById("brillancePorsche");
-// 	// reflPorsche = sliderReflPorsche.value;
-// 	// sliderReflPorsche.oninput = function() {
-// 	// 	reflPorsche = this.value;
-// 	// }
-// 	// var sliderReflFord = document.getElementById("brillanceFord");
-// 	// reflFord = sliderReflFord.value;
-// 	// sliderReflFord.oninput = function() {
-// 	// 	reflFord = this.value;
-// 	// }
+		}
+	} else 	if (m==OBJ[2]){	  //initialisation du  boutton "Reflectance" sur la Porsche
+		var sliderReflPorsche = document.getElementById("refl");
+		reflPorsche = sliderReflPorsche.value;
+		var outputP = document.getElementById("brillance");
+		outputP.innerHTML = sliderReflPorsche.value;
+		sliderReflPorsche.oninput = function() {
+			reflPorsche = this.value;
+			outputP.innerHTML = this.value;
+		}
+	}else if (m==OBJ[0]){  	//initialisation du  boutton "Reflectance" sur le Bunny  	//initialisation du  boutton "Reflectance" sur la Sphère
 
-// }
+		var sliderReflLapin = document.getElementById("refl");
+		reflLapin = sliderReflLapin.value;
+		var outputB = document.getElementById("brillance");
+		outputB.innerHTML = sliderReflLapin.value;
+		sliderReflLapin.oninput = function() {
+			reflLapin = this.value;
+			outputB.innerHTML = this.value;
 
-// function slideRugosite() {
-// 	var sliderLisseLapin = document.getElementById("lisseLapin");
-// 	lisseLapin = sliderLisseLapin.value;
-// 	var outputBu = document.getElementById("rugBunny");
-// 	outputBu.innerHTML = sliderLisseLapin.value;
-// 	sliderLisseLapin.oninput = function() {
-// 		lisseLapin= this.value;
-// 		outputBu.innerHTML = this.value;
-// 	}
-// 	var sliderLisseSphere = document.getElementById("lisseSphere");
-// 	lisseSphere = sliderLisseSphere.value;
-// 	sliderLisseSphere.oninput = function() {
-// 		lisseSphere= this.value;
-// 	}
-// 	var sliderLissePorsche = document.getElementById("lissePorsche");
-// 	lissePorsche = sliderLissePorsche.value;
-// 	sliderLissePorsche.oninput = function() {
-// 		lissePorsche= this.value;
-// 	}
-// 	var sliderLisseFord = document.getElementById("lisseFord");
-// 	lisseFord = sliderLisseFord.value;
-// 	sliderLisseFord.oninput = function() {
-// 		lisseFord= this.value;
-// 	}
-// }
+		}
+	}
+
+}
+
+function slideRugosite(m) {
+	if (m==OBJ[4]){  	//initialisation du  boutton "Rugosité" sur la Sphère
+
+		var sliderAlphaSphere = document.getElementById("lisse");
+		lisseSphere = sliderAlphaSphere.value;
+		var outputSp = document.getElementById("rug");
+		outputSp.innerHTML = sliderAlphaSphere.value;
+		sliderAlphaSphere.oninput = function() {
+			lisseSphere= this.value;
+			outputSp.innerHTML = this.value;
+		}
+
+	}else if (m==OBJ[3]){  //initialisation du  boutton "Rugosité" sur la Ford
+		var sliderAlphaFord = document.getElementById("lisse");
+		lisseFord = sliderAlphaFord.value;
+		var outputFo = document.getElementById("rug");
+		outputFo.innerHTML = sliderAlphaFord.value;
+		sliderAlphaFord.oninput = function() {
+			lisseFord= this.value;
+			outputFo.innerHTML = this.value;
+		}
+		
+	}else if (m==OBJ[2]){ //initialisation du  boutton "Rugosité" sur la Porsche
+		var sliderAlphaPorsche = document.getElementById("lisse");
+		lissePorsche = sliderAlphaPorsche.value;
+		var outputPo = document.getElementById("rug");
+		outputPo.innerHTML = sliderAlphaPorsche.value;
+		sliderAlphaPorsche.oninput = function() {
+			lissePorsche= this.value;
+			outputPo.innerHTML = this.value;
+		}
+
+	}else if (m==OBJ[0]){  //initialisation du  boutton "Rugosité" sur le Bunny
+		var sliderLisseLapin = document.getElementById("lisse");
+		lisseLapin = sliderLisseLapin.value;
+		var outputBu = document.getElementById("rug");
+		outputBu.innerHTML = sliderLisseLapin.value;
+		sliderLisseLapin.oninput = function() {
+			lisseLapin= this.value;
+			outputBu.innerHTML = this.value;
+		}
+	}
+}
 
 function buttonBehaviour(){
 	if(document.getElementById("redLapin").checked) {
@@ -374,8 +409,8 @@ function refresh() {
 	SelectAnObject(value);
 	// buttonBehaviour();
 	slideAlpha(m);
-	// slideReflectance();
-	// slideRugosite();
+	slideReflectance(m);
+	slideRugosite(m);
 	loadShaders(OBJ[0]);
 	loadShaders(OBJ[1]);;
 	loadShaders(OBJ[2]);
