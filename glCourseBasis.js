@@ -58,7 +58,14 @@ var translation =[];
 var fogColor = [0.7, 0.7, 0.7, 1.0] ;
 var fogAmount = 0.1;
 
-var fdfLapin, fdfSphere, fdfPorsche, fdfFord = true;
+var visibleLapin = true;
+var visibleSphere = true;
+var visiblePorsche = true;
+var visibleFord = true;
+var fdfLapin = true;
+var fdfSphere = true;
+var fdfPorsche = true;
+var fdfFord = true;
 
 // =====================================================
 // OBJET 3D, lecture fichier obj
@@ -407,7 +414,7 @@ function filDeFer() {
 		}
 	} else if (m==OBJ[2]){ 
 		if(document.getElementById("fdf").checked){
-					fdfPorsche = true;
+				fdfPorsche = true;
 		}else{
 				fdfPorsche = false;
 		}
@@ -453,6 +460,34 @@ function buttonBehaviour(){
 	}
 }
 
+function setVisible(){
+	if (m==OBJ[4]){
+		if(document.getElementById("affiche").checked) {
+			visibleSphere = true;
+		}else{
+			visibleSphere = false;
+		}
+	}else if (m==OBJ[3]){
+		if(document.getElementById("affiche").checked) {
+			visibleFord = true;
+		}else{
+			visibleFord = false;
+		}
+	} else if (m==OBJ[2]){ 
+		if(document.getElementById("affiche").checked) {
+			visiblePorsche = true;
+		}else{
+			visiblePorsche = false;
+		}
+	} else if (m==OBJ[0]){ 
+		if(document.getElementById("affiche").checked) {
+			visibleLapin = true;
+		}else{
+			visibleLapin = false;
+		}
+	}
+}
+
 function refresh() {
 	SelectAnObject(value);
 	// buttonBehaviour();
@@ -461,6 +496,7 @@ function refresh() {
 	slideRugosite(m);
 	slideFog();
 	filDeFer();
+	setVisible();
 	loadShaders(OBJ[0]);
 	loadShaders(OBJ[1]);;
 	loadShaders(OBJ[2]);
@@ -662,27 +698,30 @@ function drawScene() {
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	//PLANE.draw();
 	OBJ[1].draw(kdPlan, alphaPlan, reflPlan, lissePlan);
-	OBJ[2].draw(kdPorsche, alphaPorsche, reflPorsche, lissePorsche);
-	if(fdfPorsche){
-		OBJ[2].draw2();
+	if (visiblePorsche){
+		OBJ[2].draw(kdPorsche, alphaPorsche, reflPorsche, lissePorsche);
+		if(fdfPorsche){
+			OBJ[2].draw2();
+		}
 	}
-	OBJ[3].draw(kdFord, alphaFord, reflFord, lisseFord);
-	if(fdfFord){
-		OBJ[3].draw2();
+	if(visibleFord){
+		OBJ[3].draw(kdFord, alphaFord, reflFord, lisseFord);
+		if(fdfFord){
+			OBJ[3].draw2();
+		}
 	}
-	OBJ[4].draw(kdSphere, alphaSphere, reflSphere, lisseSphere);
-	if(fdfSphere){
-		OBJ[4].draw2();
+	if(visibleSphere){
+		OBJ[4].draw(kdSphere, alphaSphere, reflSphere, lisseSphere);
+		if(fdfSphere){
+			OBJ[4].draw2();
+		}
 	}
-	OBJ[0].draw(kdLapin, alphaBunny, reflLapin, lisseLapin);
-	if(fdfLapin){
-		OBJ[0].draw2();
+	if(visibleLapin){
+		OBJ[0].draw(kdLapin, alphaBunny, reflLapin, lisseLapin);
+		if(fdfLapin){
+			OBJ[0].draw2();
+		}
 	}
-
-
-	
-	
-	
 }
 
 
