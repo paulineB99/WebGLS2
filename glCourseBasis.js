@@ -1,3 +1,10 @@
+/*****************************************************************************************************************/
+/* 							PROJET DEVELOPPE EN  WEBGL DANS LE CADRE DE L'UE IMAGERIE DU VIVANT					 */
+/*		 						 	M1-GENIE PHYSIOLOGIQUE BIOTECHNOLOGIQUE ET INFORMATIQUE 				     */
+/*											BREMOND PAULINE & NDITAR NAOMI YAGALE			    				 */
+/*													ANNEE : 2020-2021									    	 */
+/*****************************************************************************************************************/
+
 
 // =====================================================
 var gl;
@@ -25,6 +32,7 @@ var kdLapin = [0.6, 0.1, 0.1];
 var kdPorsche = [0.6, 0.1, 0.1];
 var kdFord = [0.6, 0.1, 0.1];
 var kdSphere = [0.6, 0.1, 0.1];
+var kdSpaceship = [0.7, 0.5, 0.1];
 
 
 
@@ -36,6 +44,7 @@ var alphaBunny = 0.3;
 var alphaPorsche = 0.3;
 var alphaFord = 0.3;
 var alphaSphere = 0.3;
+var alphaSpaceship = 0.9;
 
 //Gestion de la reflectance pour chacun des objets
 //var refl = 0.6;
@@ -44,6 +53,7 @@ var reflPorsche = 0.6;
 var reflFord = 0.6;
 var reflSphere = 0.6; 
 var reflPlan = 0;
+var reflSpaceShip = 0.2;
 
 //Gestion de la rugosité pour chacun des objets
 //var lisse = 100.0;
@@ -52,6 +62,7 @@ var lissePorsche = 100.0;
 var lisseFord = 100.0;
 var lisseSphere = 100.0;
 var lissePlan = 1.0;
+var lisseSpaceship = 100.0;
 
 var translation =[];
 
@@ -62,10 +73,13 @@ var visibleLapin = true;
 var visibleSphere = true;
 var visiblePorsche = true;
 var visibleFord = true;
+var visibleSpaceship = true;
+
 var fdfLapin = true;
 var fdfSphere = true;
 var fdfPorsche = true;
 var fdfFord = true;
+var fdSpaceship = false;
 
 // =====================================================
 // OBJET 3D, lecture fichier obj
@@ -254,9 +268,18 @@ function initiatButton(){
 
 		// ===== Fonctions de mise à jour du bouton alpha, reflectance et  rugosité
 
-function slideAlpha(m) { //TODO : Corriger les petites erreurs (lorsqu'on clique plusieurs fois alternativement, l'action s'applique à deux objets en simmultané)
-	//initialisation du boutton "alpha" sur la sphère
-	if (m==OBJ[4]){
+function slideAlpha(m) { 
+	
+	if (m==OBJ[5]){  //initialisation du boutton "alpha" sur le spaceship
+		var sliderAlphaSpaceship  = document.getElementById("alphaB");
+		alphaSpaceship = sliderAlphaSpaceship.value;
+		var outputSpaceship = document.getElementById("demo");
+		outputSpaceship.innerHTML = sliderAlphaSpaceship.value;
+		alphaSpaceship.oninput = function(){
+			alphaSpaceship = this.value;
+			outputSpaceship.innerHTML = this.value;
+		}
+	}else if (m==OBJ[4]){  //initialisation du boutton "alpha" sur la sphère
 		var sliderAlphaSphere  = document.getElementById("alphaB");
 		alphaSphere = sliderAlphaSphere.value;
 		var outputSphere = document.getElementById("demo");
@@ -296,8 +319,18 @@ function slideAlpha(m) { //TODO : Corriger les petites erreurs (lorsqu'on clique
 }
 
 function slideReflectance(m) {
-	//initialisation du  boutton "Reflectance" sur la Sphère
-	if (m==OBJ[4]){
+	
+	if (m==OBJ[5]){  //initialisation du  boutton "Reflectance" sur le space ship
+		var sliderAlphaSpaceship = document.getElementById("refl");
+		reflSpaceShip = sliderAlphaSpaceship.value;
+		var outputSSh = document.getElementById("brillance");
+		outputSSh.innerHTML = sliderAlphaSpaceship.value;
+		sliderAlphaSpaceship.oninput = function() {
+			reflSpaceShip = this.value;
+			outputSSh.innerHTML = this.value;
+
+		}
+	}else if (m==OBJ[4]){  //initialisation du  boutton "Reflectance" sur la Sphère
 		var sliderAlphaSphere = document.getElementById("refl");
 		reflSphere = sliderAlphaSphere.value;
 		var outputS = document.getElementById("brillance");
@@ -326,7 +359,7 @@ function slideReflectance(m) {
 			reflPorsche = this.value;
 			outputP.innerHTML = this.value;
 		}
-	}else if (m==OBJ[0]){  	//initialisation du  boutton "Reflectance" sur le Bunny  	//initialisation du  boutton "Reflectance" sur la Sphère
+	}else if (m==OBJ[0]){  	//initialisation du  boutton "Reflectance" sur le Bunny  	
 
 		var sliderReflLapin = document.getElementById("refl");
 		reflLapin = sliderReflLapin.value;
@@ -342,7 +375,18 @@ function slideReflectance(m) {
 }
 
 function slideRugosite(m) {
-	if (m==OBJ[4]){  	//initialisation du  boutton "Rugosité" sur la Sphère
+	if (m==OBJ[5]){  	//initialisation du  boutton "Rugosité" sur le space ship
+
+		var sliderAlphaSpaceship = document.getElementById("lisse");
+		lisseSphere = sliderAlphaSpaceship.value;
+		var outputSpSh = document.getElementById("rug");
+		outputSpSh.innerHTML = sliderAlphaSpaceship.value;
+		sliderAlphaSsliderAlphaSpaceshipphere.oninput = function() {
+			lisseSphere= this.value;
+			outputSpSh.innerHTML = this.value;
+		}
+
+	}else if (m==OBJ[4]){  	//initialisation du  boutton "Rugosité" sur la Sphère
 
 		var sliderAlphaSphere = document.getElementById("lisse");
 		lisseSphere = sliderAlphaSphere.value;
@@ -461,7 +505,13 @@ function buttonBehaviour(){
 }
 
 function setVisible(){
-	if (m==OBJ[4]){
+	if (m==OBJ[5]){
+		if(document.getElementById("affiche").checked) {
+			visibleSpaceship = true;
+		}else{
+			visibleSpaceship = false;
+		}
+	}else if (m==OBJ[4]){
 		if(document.getElementById("affiche").checked) {
 			visibleSphere = true;
 		}else{
@@ -678,6 +728,7 @@ function webGLStart() {
 	OBJ[2] = new objmesh('porsche.obj');
 	OBJ[3] = new objmesh('ford.obj');
 	OBJ[4] = new objmesh('sphere.obj');
+	OBJ[5] = new objmesh('spaceship.obj');
 
 	
 
@@ -698,6 +749,13 @@ function drawScene() {
 	gl.clear(gl.COLOR_BUFFER_BIT);
 	//PLANE.draw();
 	OBJ[1].draw(kdPlan, alphaPlan, reflPlan, lissePlan);
+
+	if (visiblePorsche){
+		OBJ[5].draw(kdSpaceship, alphaSpaceship, reflSpaceShip, lisseSpaceship);
+		if(fdSpaceship){
+			OBJ[5].draw2();
+		}
+	}
 	if (visiblePorsche){
 		OBJ[2].draw(kdPorsche, alphaPorsche, reflPorsche, lissePorsche);
 		if(fdfPorsche){
