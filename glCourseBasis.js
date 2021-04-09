@@ -77,11 +77,11 @@ var visibleFord = true;
 var visibleSpaceship = true;
 
 var fdf = true;
-var fdfLapin = true;
+var fdfLapin = false;
 var fdfSphere = true;
 var fdfPorsche = true;
 var fdfFord = true;
-var fdfSpaceship = true;
+var fdfSpaceship = false;
 
 // =====================================================
 // OBJET 3D, lecture fichier obj
@@ -366,9 +366,15 @@ function buttonBehaviour(m){
 	if(document.getElementById("red").checked) {
 		kd = [0.6,0.1,0.1];
 	}else if(document.getElementById("green").checked) {
-		kd = [0,1,0];
+		kd = [0.1,0.8,0.1];
 	}else if(document.getElementById("blue").checked) {
-		kd = [0,0,1];
+		kd = [0.1,0.1,0.8];
+	}else if(document.getElementById("yellow").checked) {
+		kd = [0.8,0.8,0.1];
+	}else if(document.getElementById("cyan").checked) {
+		kd = [0.1,0.8,0.8];
+	}else if(document.getElementById("magenta").checked) {
+		kd = [0.6,0.1,0.8];
 	}
 	if (m==OBJ[5]){
 		kdSpaceship = kd;
@@ -584,7 +590,7 @@ function webGLStart() {
 	mat4.rotate(rotMatrix, rotY, [0, 0, 1]);
 
 	//point d'observation
-	distCENTER = vec3.create([0.8,-0.2,-10]);
+	distCENTER = vec3.create([0.0,0.0,-10]);
 	
 	//PLANE = new plane();
 

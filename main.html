@@ -40,14 +40,28 @@
 				<h3> 
 					
 					<label>Couleur</label>
-					
-						<form id="kd">
-						<input type="radio" id="red" onclick="refresh()" name="kd" value="red">
-						<label for="red"> Rouge </label><br>
-						<input type="radio" id="green" onclick="refresh()" name="kd" value="green">
-						<label for="green"> Vert </label><br>
-						<input type="radio" id="blue" onclick="refresh()" name="kd" value="blue"> 
-						<label for="blue"> Bleu </label><br>
+				
+					<form class = "kd" id="kd">
+						<table>
+							<tr>
+								<th>
+									<input type="radio" id="red" onclick="refresh()" name="kd" value="red">
+									<label for="red"> Rouge </label><br>
+									<input type="radio" id="green" onclick="refresh()" name="kd" value="green">
+									<label for="green"> Vert </label><br>
+									<input type="radio" id="blue" onclick="refresh()" name="kd" value="blue"> 
+									<label for="blue"> Bleu </label><br>
+								</th>
+								<th>
+									<input type="radio" id="yellow" onclick="refresh()" name="kd" value="yellow">
+									<label for="yellow"> Jaune </label><br>
+									<input type="radio" id="cyan" onclick="refresh()" name="kd" value="cyan">
+									<label for="cyan"> cyan </label><br>
+									<input type="radio" id="magenta" onclick="refresh()" name="kd" value="magenta"> 
+									<label for="magenta"> magenta </label><br>
+								</th>
+							</tr>
+						</table>
 					</form>
 					<p><label> Alpha : </label> <span id="demo">0.5</span>
 						<br>
