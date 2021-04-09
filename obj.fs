@@ -1,7 +1,7 @@
 
 precision mediump float;
 
-varying vec4 pos3D;				//pos3D est calculé à partir de la position des sommets
+varying vec4 pos3D;
 varying vec3 N;
 varying vec3 kd;
 varying float alpha;
@@ -10,10 +10,7 @@ varying float lisse;
 
 const float PI = 3.14159;
 
-//out vec4 color;
-
-//vec3 SRCpos = vec3(1.0, 1.0, 0.0); //position de la source
-
+// Couleur et intensité du brouillard
 varying vec4 fogColor;
 varying float fogAmount;
 
@@ -40,23 +37,19 @@ vec3 FrLambertPhong(vec3 kd, float ks, float n, vec3 N, vec3 vi, vec3 vo)
 void main(void)
 {
 	vec3 Nn = normalize(N);
-	//vec3 kd = vColor; 							//couleur
-	float ks = reflectance;						//def de la reflectance => 0 = mat // 1 = brillant af
-	float n= lisse;							//rigosité du matériau
-	vec3 Li = vec3(5.0); 						//puissance de la source
-	vec3 lPos = vec3(0.0);
+	float ks = reflectance;						// Réfléctance du matériau 
+	float n= lisse;								// Rugosité du matériau
+	vec3 Li = vec3(5.0); 						// Puissance de la source
+	vec3 lPos = vec3(0.0);						// Position de la source
 
-	//color = vec4(0.6,0.1,0.1,0.3);
 	vec3 vi = normalize(vec3(lPos-vec3(pos3D))); 		//direction d'incidence de la lumière
 	vec3 vo = normalize(vec3(-vec3(pos3D)));			//direction d'observation
 
 	vec3 Fr = FrLambertPhong(kd,ks,n,N,vi,vo);			//réflectance qui décrit la manière dont i arrive
-	float cosTi = ddot(N,vi);							//cos de l'orientation
+	float cosTi = ddot(N,vi);							//cosinus de l'orientation
 
 	vec3 Lo = Li * Fr * cosTi;
-	//gl_FragColor = vec4(Lo,alpha); //+ (fogColor- originalColor) * fogAmount
 	vec4 originalColor = vec4(Lo,alpha);
-	//gl_FragColor = originalColor + (fogColor - originalColor) * fogAmount;
 	gl_FragColor = mix(originalColor, fogColor, fogAmount);
 
 	

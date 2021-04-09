@@ -64,8 +64,6 @@ var lisseSphere = 100.0;
 var lissePlan = 1.0;
 var lisseSpaceship = 100.0;
 
-var translation =[];
-
 var fogColor = [0.7, 0.7, 0.7, 1.0] ;
 var fogAmount = 0.1;
 
@@ -127,8 +125,6 @@ class objmesh {
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.mesh.normalBuffer);
 		gl.vertexAttribPointer(this.shader1.nAttrib, this.mesh.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
-		this.shader1.tAttrib = gl.getUniformLocation(this.shader1.shader, "aTranslation");
-		gl.uniform3fv(this.shader1.tAttrib, translation);
 
 		this.shader1.rMatrixUniform = gl.getUniformLocation(this.shader1.shader, "uRMatrix");
 		this.shader1.mvMatrixUniform = gl.getUniformLocation(this.shader1.shader, "uMVMatrix");
@@ -170,8 +166,6 @@ class objmesh {
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.mesh.vertexBuffer);
 		gl.vertexAttribPointer(this.shader2.vAttrib, this.mesh.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
-		this.shader2.tAttrib = gl.getUniformLocation(this.shader2.shader, "aTranslation");
-		gl.uniform3fv(this.shader2.tAttrib, translation);
 
 		this.shader2.mvMatrixUniform = gl.getUniformLocation(this.shader2.shader, "uMVMatrix");
 		this.shader2.pMatrixUniform = gl.getUniformLocation(this.shader2.shader, "uPMatrix");
@@ -229,29 +223,23 @@ function SelectAnObject( value){
 	if (value=="Porsche"){
 		m=OBJ[2];
 		document.onclick = function(){slideAlpha(m)};
-
 	}
 	else if (value=="Bunny"){
 		m=OBJ[0];
 		document.onclick = function(){slideAlpha(m)};
-
 	}
 	else if (value=="Ford"){
 		m=OBJ[3];
 		document.onclick = function(){slideAlpha(m)};
-
 	}
 	else if (value=="Sphere"){
 		m=OBJ[4];
 		document.onclick = function(){slideAlpha(m)};
-		
-
 	}
 	else if (value=="Spaceship"){
 		m=OBJ[5];
 		document.onclick = function(){slideAlpha(m)};
 	}
-
 }
 
 
@@ -362,6 +350,7 @@ function filDeFer(m) {
 		
 }
 
+		// Fonction du comportement des boutons de selection des couleurs
 function buttonBehaviour(m){
 	if(document.getElementById("red").checked) {
 		kd = [0.6,0.1,0.1];
@@ -389,6 +378,7 @@ function buttonBehaviour(m){
 	}
 }
 
+		// Fonction de mise a jour de l'affichage des objets
 function setVisible(m){
 	if(document.getElementById("affiche").checked) {
 		visible = true;
@@ -408,6 +398,7 @@ function setVisible(m){
 	}
 }
 
+		// fonction permettant de rafraichir les paramètres à chaque changement 
 function refresh() {
 	SelectAnObject(value);
 	buttonBehaviour(m);
@@ -591,8 +582,6 @@ function webGLStart() {
 
 	//point d'observation
 	distCENTER = vec3.create([0.0,0.0,-10]);
-	
-	//PLANE = new plane();
 
 	OBJ[0] = new objmesh('bunny.obj');
 	OBJ[1] = new objmesh('plane.obj');
@@ -609,14 +598,12 @@ function webGLStart() {
 // =====================================================
 
 function drawScene() {
-	// A chaque fois qu'on actulaise la scene on efface l'image et on rédessine le plan et l'objet
 	gl.clear(gl.COLOR_BUFFER_BIT);
-	//PLANE.draw();
 	OBJ[1].draw(kdPlan, alphaPlan, reflPlan, lissePlan);
-
-	if (visibleSpaceship){
+	
+	if (visibleSpaceship){		// On vérifie dans un premier temps si l'objet doit etre affiché ou non 
 		OBJ[5].draw(kdSpaceship, alphaSpaceship, reflSpaceShip, lisseSpaceship);
-		if(fdfSpaceship){
+		if(fdfSpaceship){		// Puis on vérifie si le fils de fer doit être affiché
 			OBJ[5].draw2();
 		}
 	}

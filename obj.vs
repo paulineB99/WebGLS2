@@ -1,3 +1,4 @@
+//Variable obtenue de glCourseBasis
 attribute vec3 aVertexPosition;
 attribute vec3 aVertexNormal;
 uniform vec3 aTranslation;
@@ -6,8 +7,6 @@ uniform mat4 uRMatrix;
 uniform mat4 uMVMatrix;
 uniform mat4 uPMatrix;
 
-//uniform vec3 uCenter; // construire avec un mvt de souris qu'on peut controler 
-
 uniform float aAlpha;
 uniform float aReflectance;
 uniform vec3 aVertexKd;
@@ -15,6 +14,7 @@ uniform float aLisse;
 uniform vec4 uFogColor;
 uniform float uFogAmount;
 
+//Variable envoyées au fragment shader
 varying vec4 pos3D;
 varying vec3 N;
 varying vec3 kd;
@@ -25,15 +25,11 @@ varying vec4 fogColor;
 varying float fogAmount;
 
 void main(void) {
-
-	//fogColor = vec4(0.8, 0.9, 1, 1);
-	//fogAmount = 0.5;
-
-	
+	// Parametre du brouillard
 	fogColor = uFogColor;
 	fogAmount = uFogAmount;
 
-
+	// Parametre des objets
 	reflectance = aReflectance;
 	alpha = aAlpha;
 	kd = aVertexKd;
