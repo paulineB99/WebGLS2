@@ -40,7 +40,7 @@ var kdSpaceship = [0.7, 0.5, 0.1];
 //var alpha = 0.3;
 var alphaInf = null;
 var alphaPlan = 1;
-var alphaBunny = 0.3;
+var alphaLapin = 0.3;
 var alphaPorsche = 0.3;
 var alphaFord = 0.3;
 var alphaSphere = 0.3;
@@ -308,11 +308,11 @@ function slideAlpha(m) {
 		}
 	}else if (m==OBJ[0]){  	//initialisation du boutton "alpha" sur le Bunny
 		var sliderAlphaBunny  = document.getElementById("alphaB");
-		alphaBunny = sliderAlphaBunny.value;
+		alphaLapin = sliderAlphaBunny.value;
 		var outputBunny = document.getElementById("demo");
 		outputBunny.innerHTML = sliderAlphaBunny.value;
-		alphaBunny.oninput = function(){
-			alphaBunny = this.value;
+		alphaLapin.oninput = function(){
+			alphaLapin = this.value;
 			outputBunny.innerHTML = this.value;
 		}
 	}
@@ -775,7 +775,7 @@ function drawScene() {
 		}
 	}
 	if(visibleLapin){
-		OBJ[0].draw(kdLapin, alphaBunny, reflLapin, lisseLapin);
+		OBJ[0].draw(kdLapin, alphaLapin, reflLapin, lisseLapin);
 		if(fdfLapin){
 			OBJ[0].draw2();
 		}
