@@ -14,13 +14,13 @@
 
 
 <body onload="webGLStart();" >
-<table>
-	<tr class = "Canva"> 
-		<th >			
-			<canvas id="WebGL-test" style="border:none;" width="1000" height="800" ></canvas>
-		</th>
-		<th class ="partieButt"  onclick="refresh()"> 
-			
+	<table>
+		<tr class = "Canva"> 
+			<th >			
+				<canvas id="WebGL-test" style="border:none;" width="1000" height="800" ></canvas>
+			</th>
+			<th class ="partieButt"  onclick="refresh()"> 
+				
 				<h1>Projet WebGL-M1- Gphy Imageur</h1> <br> 
 				<h2>
 					<label>Liste des objets : </label>
@@ -31,13 +31,24 @@
 						<option value = "Porsche" id ="second" onclick="SelectAnObject('Porsche')">Porsche</option>
 						<option value = "Ford" id= "third" onclick="SelectAnObject('Ford')">Ford</option>
 						<option value = "Sphere" id ="four" onclick="SelectAnObject('Sphere')">Sphere</option>
+						<option value = "Spaceship" id ="five" onclick="SelectAnObject('Spaceship')">Spaceship</option>
+
 
 
 					</select>
 				</h2>		
-				
-				
 				<h3> 
+					
+					<label>Couleur</label>
+					
+						<form id="kd">
+						<input type="radio" id="red" onclick="refresh()" name="kd" value="red">
+						<label for="red"> Rouge </label><br>
+						<input type="radio" id="green" onclick="refresh()" name="kd" value="green">
+						<label for="green"> Vert </label><br>
+						<input type="radio" id="blue" onclick="refresh()" name="kd" value="blue"> 
+						<label for="blue"> Bleu </label><br>
+					</form>
 					<p><label> Alpha : </label> <span id="demo">0.5</span>
 						<br>
 						<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.50" class="slider" id="alphaB">
@@ -71,91 +82,9 @@
 				
 					</h3>
 				</p>
-				
-						
-			
-</th>
-</tr>
-</table>
-			
-			
-				<!-- <form ><h2>
-					<label for="Objects" onclick="myObjChoices(value)">  Select an object : </label>
-					<select id="myObj" name="Objects">
-						<option value="Lapin"   id = "Lapin">Lapin</option>
-					  	<option value="Ford" onclick="myObjChoices()"  id = "Ford">Ford</option>
-					 	<option value="Porsche" onclick="myObjChoices()"  id = "Porsche">Porsche</option>
-						<option value="Sphere" onclick="myObjChoices()"  id = "Sphere" >Sphere</option>
-					</select>
-				</h2></form> -->
-
-				<!-- <label>Alpha</label>
-					<input type="range" min="0" max="1" step="0.01" onclick="refresh()" value="0.30" class="slider" id="alphaLapin">
-					<br> -->
-
-					
-				<!--<div class="dropdown">
-					<button onclick="myObjChoices()" class="dropbtn"><h2>Les objets</h2></a></button>
-					<div div id="myDropdown" class="dropdown-content">
-					<input onclick="myObjChoices()"  href="#Lapin" id = "Lapin">
-						
-						<h4>Lapin</h4>
-					>
-					  <a href="#Sphere" id = "Sphere"><h4>Sphère</h4></a>
-					  <a href="#Ford" id = "Ford"><h4>Ford</h4></a>
-					  <a href="#Porsche" id = "Porsche"><h4>Porsche</h4></a>
-					</div>
-				  </div>
-				</div>-->
-
-			
-					
-					<label>Couleur</label>
-					
-						<form id="kdLapin">
-						<input type="radio" id="redLapin" onclick="refresh()" name="kdLapin" value="red">
-						<!-- <label for="red"> Rouge </label><br>
-						<input type="radio" id="greenLapin" onclick="refresh()" name="kdLapin" value="green">
-						<label for="green"> Vert </label><br>
-						<input type="radio" id="blueLapin" onclick="refresh()" name="kdLapin" value="blue"> 
-						<label for="blue"> Bleu </label><br>
-					</form>
-					<form id="kdSphere">-->
-						<input type="radio" id="redSphere" onclick="refresh()" name="kdSphere" value="red">
-						<!-- <label for="redSphere"> Rouge </label><br>
-						<input type="radio" id="greenSphere" onclick="refresh()" name="kdSphere" value="green">
-						<label for="greenSphere"> Vert </label><br>
-						<input type="radio" id="blueSphere" onclick="refresh()" name="kdSphere" value="blue">
-						<label for="blueSphere"> Bleu </label><br> -->
-					</form>
-
-					<!-- <h4>Porsche</h4> 
-					<label>Couleur</label>
-					 <form id="kdPorshe"> -->
-						<input type="radio" id="redPorsche" onclick="refresh()" name="kdPorsche" value="red">
-						<!-- <label for="redPorsche"> Rouge </label><br>
-						<input type="radio" id="greenPorsche" onclick="refresh()" name="kdPorsche" value="green">
-						<label for="greenPorsche"> Vert </label><br>
-						<input type="radio" id="bluePorsche" onclick="refresh()" name="kdPorsche" value="blue">
-						<label for="bluePorsche"> Bleu </label><br>
-					</form>
-					<label>Couleur</label>
-					<form id="kdFord"> -->
-						<input type="radio" id="redFord" onclick="refresh()" name="kdFord" value="red">
-						<!-- <label for="redFord"> Rouge </label><br>
-						<input type="radio" id="greenFord" onclick="refresh()" name="kdFord" value="green">
-						<label for="greenFord"> Vert </label><br>
-						<input type="radio" id="blueFord" onclick="refresh()" name="kdFord" value="blue">
-						<label for="blueFord"> Bleu </label><br>
-					</form>
-
-				-->
-			
-
-			
-		</th>
-		</tr>	
-	</div>		
+			</th>
+		</tr>
+	</table>	
 </body>
 
 
